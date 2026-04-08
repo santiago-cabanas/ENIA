@@ -34,7 +34,6 @@
         }
 
         h1, h2, h3 { font-weight: 600; }
-        p { font-weight: 400; }
 
         /* --- HEADER --- */
         header {
@@ -75,20 +74,33 @@
         .menu-toggle {
             display: none;
             flex-direction: column;
-            gap: 6px;
+            justify-content: center;
+            align-items: flex-end; /* Alinea las líneas a la derecha */
+            width: 30px;
+            height: 30px;
             cursor: pointer;
-            z-index: 1001;
-            padding: 10px;
+            z-index: 1002;
+            position: relative;
         }
 
         .menu-toggle span {
             width: 28px;
             height: 2px;
             background-color: var(--negro);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
         }
 
-        /* --- HERO --- */
+        .menu-toggle span:nth-child(1) { transform: translateY(-8px); }
+        .menu-toggle span:nth-child(2) { width: 20px; } /* Estética moderna: línea media más corta */
+        .menu-toggle span:nth-child(3) { transform: translateY(8px); }
+
+        /* Estado X (Cerrar) */
+        .menu-toggle.open span:nth-child(1) { transform: translateY(0) rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; transform: translateX(10px); }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+
+        /* --- SECCIONES --- */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -104,7 +116,6 @@
         .hero-text { flex: 1.5; }
         .hero-text h1 { font-size: 3rem; line-height: 1.2; color: var(--azul); }
 
-        /* --- SECCIONES & GRID --- */
         section.content-section { padding: 6rem 10%; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: var(--azul); }
         
@@ -119,11 +130,8 @@
             border-radius: 12px;
             padding: 2.5rem 2rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
             border: 1px solid transparent;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
         }
 
         .card:hover {
@@ -132,22 +140,19 @@
             border-color: var(--negro);
         }
 
-        .card h3 { font-size: 1.3rem; color: var(--negro); }
+        .card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
         .card p { color: var(--azul); font-size: 1rem; }
 
-        #propuesta { background-color: var(--gris); }
-        #referenciales { background-color: var(--blanco); }
-        #roadmap { background-color: var(--gris); }
-        #principios { background-color: var(--blanco); }
+        #propuesta, #roadmap { background-color: var(--gris); }
 
         /* --- ROADMAP --- */
         .timeline-wrapper { position: relative; width: 100%; max-width: 1000px; margin: 4rem auto; }
-        .timeline-track { display: flex; height: 30px; border-radius: 15px; background-color: #e0e0e0; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+        .timeline-track { display: flex; height: 30px; border-radius: 15px; background: #e0e0e0; overflow: hidden; }
         
         .phase-block { height: 100%; transition: opacity 0.3s ease; cursor: pointer; }
-        .phase-1-block { width: 33.33%; background-color: var(--azul); }
-        .phase-2-block { width: 44.44%; background-color: var(--amarillo); }
-        .phase-3-block { width: 22.23%; background-color: var(--negro); }
+        .phase-1-block { width: 33.33%; background: var(--azul); }
+        .phase-2-block { width: 44.44%; background: var(--amarillo); }
+        .phase-3-block { width: 22.23%; background: var(--negro); }
 
         .marker {
             position: absolute;
@@ -157,25 +162,24 @@
             flex-direction: column;
             align-items: center;
             transform: translateX(-50%);
-            z-index: 10;
         }
 
-        .marker-text { background: var(--negro); color: var(--blanco); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; white-space: nowrap; }
-        .marker-line { width: 2px; height: 50px; background-color: var(--negro); }
+        .marker-text { background: var(--negro); color: var(--blanco); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; }
+        .marker-line { width: 2px; height: 50px; background: var(--negro); }
 
         .roadmap-legend { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; }
-        .legend-item { flex: 1; display: flex; gap: 12px; cursor: pointer; padding: 15px; border-radius: 8px; transition: all 0.3s ease; }
-        .color-dot { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+        .legend-item { flex: 1; display: flex; gap: 10px; padding: 10px; border-radius: 8px; transition: 0.3s; cursor: pointer;}
+        .color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
         .dot-1 { background: var(--azul); } .dot-2 { background: var(--amarillo); } .dot-3 { background: var(--negro); }
-        .legend-text strong { display: block; color: var(--negro); margin-bottom: 2px; }
-        .legend-text span { font-size: 0.85rem; color: var(--azul); display: block; }
+        .legend-text strong { display: block; font-size: 0.95rem; }
+        .legend-text span { font-size: 0.85rem; color: var(--azul); }
 
         /* --- FOOTER --- */
-        footer { background: var(--azul); padding: 2rem; text-align: center; }
-        footer p { color: var(--blanco); font-style: italic; font-size: 0.875rem; }
+        footer { background: var(--azul); padding: 2rem; text-align: center; color: var(--blanco); font-style: italic; font-size: 0.8rem; }
 
         /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 850px) {
+            header { padding: 1rem 8%; } /* Padding lateral ligeramente mayor en móvil */
             .menu-toggle { display: flex; }
             
             nav ul {
@@ -183,30 +187,26 @@
                 right: -100%;
                 top: 0;
                 height: 100vh;
-                width: 70%;
-                background-color: var(--blanco);
+                width: 80%;
+                background: var(--blanco);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                transition: right 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+                transition: right 0.4s ease;
                 box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                z-index: 1001;
             }
 
             nav ul.active { right: 0; }
-            
-            /* Animación X Hamburguesa */
-            .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-            .menu-toggle.open span:nth-child(2) { opacity: 0; }
-            .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+            nav ul li { margin: 1.5rem 0; }
+            nav a { font-size: 1.2rem; }
 
-            #hero { flex-direction: column; text-align: center; gap: 3rem; padding-top: 2rem; }
+            #hero { flex-direction: column; text-align: center; padding-top: 4rem; }
             .hero-logo img { max-width: 140px; }
             .hero-text h1 { font-size: 1.8rem; }
 
             .cards-grid { grid-template-columns: 1fr; }
             .roadmap-legend { flex-direction: column; }
-            .legend-item { padding: 10px; }
-            .section-title { font-size: 2rem; margin-bottom: 2rem; }
             section.content-section { padding: 4rem 8%; }
         }
     </style>
@@ -252,11 +252,11 @@
             </div>
             <div class="card">
                 <h3>Certificaciones reconocidas</h3>
-                <p>Usamos 6 regulaciones existentes de referencia, para cubrir todos los requisitos actuales.</p>
+                <p>Usamos 6 regulaciones existentes de referencia para cubrir todos los requisitos actuales.</p>
             </div>
             <div class="card">
                 <h3>Niveles de cumplimiento</h3>
-                <p>Cada auditoría concluye con un nivel de cumplimiento, en vez de un resultado binario.</p>
+                <p>Cada auditoría concluye con un nivel de cumplimiento progresivo en vez de un resultado binario.</p>
             </div>
         </div>
     </section>
