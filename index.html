@@ -18,7 +18,6 @@
             --negro: #000000;
         }
 
-        /* --- GLOBAL --- */
         * {
             margin: 0;
             padding: 0;
@@ -33,8 +32,6 @@
             line-height: 1.5;
         }
 
-        h1, h2, h3 { font-weight: 600; }
-
         /* --- HEADER --- */
         header {
             position: fixed;
@@ -42,7 +39,7 @@
             width: 100%;
             background-color: var(--blanco);
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Logo a la izq, Menú a la der */
             align-items: center;
             padding: 1rem 5%;
             z-index: 1000;
@@ -68,37 +65,39 @@
             transition: color 0.3s ease;
         }
 
-        nav a:hover { color: var(--azul); }
-
-        /* Hamburguesa Toggle */
+        /* Botón Hamburguesa (Móvil) */
         .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end; /* Alinea las líneas a la derecha */
+            display: none; /* Oculto en desktop */
             width: 30px;
-            height: 30px;
+            height: 24px;
+            position: relative;
             cursor: pointer;
             z-index: 1002;
-            position: relative;
+            /* Eliminamos márgenes para que flex-end de header haga su trabajo */
         }
 
         .menu-toggle span {
-            width: 28px;
-            height: 2px;
-            background-color: var(--negro);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
             position: absolute;
+            height: 2px;
+            width: 100%;
+            background: var(--negro);
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
         }
 
-        .menu-toggle span:nth-child(1) { transform: translateY(-8px); }
-        .menu-toggle span:nth-child(2) { width: 20px; } /* Estética moderna: línea media más corta */
-        .menu-toggle span:nth-child(3) { transform: translateY(8px); }
+        /* Posicionamiento de las 3 barras */
+        .menu-toggle span:nth-child(1) { top: 0px; }
+        .menu-toggle span:nth-child(2) { top: 10px; width: 70%; left: 30%; } /* Barra media corta a la derecha */
+        .menu-toggle span:nth-child(3) { top: 20px; }
 
-        /* Estado X (Cerrar) */
-        .menu-toggle.open span:nth-child(1) { transform: translateY(0) rotate(45deg); }
-        .menu-toggle.open span:nth-child(2) { opacity: 0; transform: translateX(10px); }
-        .menu-toggle.open span:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+        /* Transformación a X */
+        .menu-toggle.open span:nth-child(1) { top: 10px; transform: rotate(135deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; left: -60px; }
+        .menu-toggle.open span:nth-child(3) { top: 10px; transform: rotate(-135deg); }
 
         /* --- SECCIONES --- */
         #hero {
@@ -111,14 +110,12 @@
             margin-top: 60px;
         }
 
-        .hero-logo { flex: 1; display: flex; justify-content: flex-end; }
         .hero-logo img { max-width: 250px; width: 100%; }
-        .hero-text { flex: 1.5; }
-        .hero-text h1 { font-size: 3rem; line-height: 1.2; color: var(--azul); }
+        .hero-text h1 { font-size: 3rem; color: var(--azul); line-height: 1.2; }
 
         section.content-section { padding: 6rem 10%; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: var(--azul); }
-        
+
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -126,30 +123,24 @@
         }
 
         .card {
-            background-color: var(--blanco);
-            border-radius: 12px;
+            background: var(--blanco);
             padding: 2.5rem 2rem;
+            border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            transition: all 0.3s ease;
             border: 1px solid transparent;
+            transition: 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-            border-color: var(--negro);
-        }
+        .card:hover { transform: translateY(-8px); border-color: var(--negro); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+        .card h3 { margin-bottom: 1rem; }
+        .card p { color: var(--azul); }
 
-        .card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
-        .card p { color: var(--azul); font-size: 1rem; }
-
-        #propuesta, #roadmap { background-color: var(--gris); }
+        #propuesta, #roadmap { background: var(--gris); }
 
         /* --- ROADMAP --- */
         .timeline-wrapper { position: relative; width: 100%; max-width: 1000px; margin: 4rem auto; }
         .timeline-track { display: flex; height: 30px; border-radius: 15px; background: #e0e0e0; overflow: hidden; }
-        
-        .phase-block { height: 100%; transition: opacity 0.3s ease; cursor: pointer; }
+        .phase-block { height: 100%; cursor: pointer; transition: 0.3s; }
         .phase-1-block { width: 33.33%; background: var(--azul); }
         .phase-2-block { width: 44.44%; background: var(--amarillo); }
         .phase-3-block { width: 22.23%; background: var(--negro); }
@@ -163,51 +154,45 @@
             align-items: center;
             transform: translateX(-50%);
         }
-
         .marker-text { background: var(--negro); color: var(--blanco); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; }
         .marker-line { width: 2px; height: 50px; background: var(--negro); }
 
         .roadmap-legend { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; }
-        .legend-item { flex: 1; display: flex; gap: 10px; padding: 10px; border-radius: 8px; transition: 0.3s; cursor: pointer;}
+        .legend-item { flex: 1; display: flex; gap: 10px; cursor: pointer; }
         .color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
         .dot-1 { background: var(--azul); } .dot-2 { background: var(--amarillo); } .dot-3 { background: var(--negro); }
-        .legend-text strong { display: block; font-size: 0.95rem; }
-        .legend-text span { font-size: 0.85rem; color: var(--azul); }
 
-        /* --- FOOTER --- */
-        footer { background: var(--azul); padding: 2rem; text-align: center; color: var(--blanco); font-style: italic; font-size: 0.8rem; }
+        footer { background: var(--azul); padding: 2.5rem; text-align: center; color: var(--blanco); font-style: italic; font-size: 0.8rem; }
 
-        /* --- MOBILE OPTIMIZATION --- */
+        /* --- MOBILE --- */
         @media (max-width: 850px) {
-            header { padding: 1rem 8%; } /* Padding lateral ligeramente mayor en móvil */
-            .menu-toggle { display: flex; }
+            header { padding: 1rem 5%; }
             
+            .menu-toggle { display: block; } /* Mostrar icono pegado a la derecha por flex del header */
+
             nav ul {
                 position: fixed;
-                right: -100%;
                 top: 0;
+                right: -100%;
+                width: 75%;
                 height: 100vh;
-                width: 80%;
                 background: var(--blanco);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                transition: right 0.4s ease;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-                z-index: 1001;
+                transition: 0.4s ease-in-out;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
             }
 
             nav ul.active { right: 0; }
             nav ul li { margin: 1.5rem 0; }
-            nav a { font-size: 1.2rem; }
+            nav a { font-size: 1.3rem; }
 
-            #hero { flex-direction: column; text-align: center; padding-top: 4rem; }
-            .hero-logo img { max-width: 140px; }
+            #hero { flex-direction: column; text-align: center; padding-top: 5rem; }
+            .hero-logo img { max-width: 150px; }
             .hero-text h1 { font-size: 1.8rem; }
-
             .cards-grid { grid-template-columns: 1fr; }
-            .roadmap-legend { flex-direction: column; }
-            section.content-section { padding: 4rem 8%; }
+            .roadmap-legend { flex-direction: column; gap: 1.5rem; }
         }
     </style>
 </head>
@@ -215,7 +200,7 @@
 
     <header>
         <a href="#hero">
-            <img src="CESN.svg" alt="CESN" class="logo">
+            <img src="CESN.svg" alt="CESN Logo" class="logo">
         </a>
         
         <div class="menu-toggle" id="mobile-menu">
@@ -235,41 +220,28 @@
     </header>
 
     <section id="hero">
-        <div class="hero-logo">
-            <img src="CESN.svg" alt="CESN Logo">
-        </div>
-        <div class="hero-text">
-            <h1>Desarrollo de Marco Regulatorio para modelos de IA aplicada a defensa</h1>
-        </div>
+        <div class="hero-logo"><img src="CESN.svg" alt="CESN Logo"></div>
+        <div class="hero-text"><h1>Desarrollo de Marco Regulatorio para modelos de IA aplicada a defensa</h1></div>
     </section>
 
     <section id="propuesta" class="content-section">
         <h2 class="section-title">Nuestra Propuesta</h2>
         <div class="cards-grid">
-            <div class="card">
-                <h3>Un marco regulatorio unificado</h3>
-                <p>Necesitamos una única referencia reguladora para los modelos de IA que serán aplicados en defensa.</p>
-            </div>
-            <div class="card">
-                <h3>Certificaciones reconocidas</h3>
-                <p>Usamos 6 regulaciones existentes de referencia para cubrir todos los requisitos actuales.</p>
-            </div>
-            <div class="card">
-                <h3>Niveles de cumplimiento</h3>
-                <p>Cada auditoría concluye con un nivel de cumplimiento progresivo en vez de un resultado binario.</p>
-            </div>
+            <div class="card"><h3>Un marco unificado</h3><p>Una única referencia reguladora para modelos de IA en defensa.</p></div>
+            <div class="card"><h3>Certificaciones</h3><p>Basado en 6 regulaciones existentes de referencia internacional.</p></div>
+            <div class="card"><h3>Cumplimiento</h3><p>Resultados por niveles de cumplimiento, no solo apto/no apto.</p></div>
         </div>
     </section>
 
     <section id="referenciales" class="content-section">
         <h2 class="section-title">Referenciales</h2>
         <div class="cards-grid">
-            <div class="card"><h3>ENS Alto</h3><p>Seguridad de los sistemas de información.</p></div>
-            <div class="card"><h3>AI Act</h3><p>Regulación Europea de Inteligencia Artificial.</p></div>
-            <div class="card"><h3>ISO 27001</h3><p>Gestión de la seguridad de la información.</p></div>
-            <div class="card"><h3>ISO 42001</h3><p>Estándar para la gestión de IA.</p></div>
-            <div class="card"><h3>ISO 31000</h3><p>Gestión de riesgos corporativos.</p></div>
-            <div class="card"><h3>Ley Contratación 2011</h3><p>Marco legal para el sector defensa.</p></div>
+            <div class="card"><h3>ENS Alto</h3><p>Ciberseguridad nacional básica.</p></div>
+            <div class="card"><h3>AI Act</h3><p>Cumplimiento normativa europea.</p></div>
+            <div class="card"><h3>ISO 27001</h3><p>Seguridad de la información.</p></div>
+            <div class="card"><h3>ISO 42001</h3><p>Gestión específica de IA.</p></div>
+            <div class="card"><h3>ISO 31000</h3><p>Gestión de riesgos.</p></div>
+            <div class="card"><h3>Ley 2011</h3><p>Contratación sector defensa.</p></div>
         </div>
     </section>
 
@@ -287,58 +259,52 @@
             </div>
         </div>
         <div class="roadmap-legend">
-            <div class="legend-item" data-target="phase1"><div class="color-dot dot-1"></div><div class="legend-text"><strong>Fase 1</strong><span>Estudio de referenciales</span></div></div>
-            <div class="legend-item" data-target="phase2"><div class="color-dot dot-2"></div><div class="legend-text"><strong>Fase 2</strong><span>Unificación de criterios</span></div></div>
-            <div class="legend-item" data-target="phase3"><div class="color-dot dot-3"></div><div class="legend-text"><strong>Fase 3</strong><span>Presentación del marco</span></div></div>
+            <div class="legend-item" data-target="phase1"><div class="color-dot dot-1"></div><div class="legend-text"><strong>Fase 1</strong><span>Estudio referenciales</span></div></div>
+            <div class="legend-item" data-target="phase2"><div class="color-dot dot-2"></div><div class="legend-text"><strong>Fase 2</strong><span>Unificación criterios</span></div></div>
+            <div class="legend-item" data-target="phase3"><div class="color-dot dot-3"></div><div class="legend-text"><strong>Fase 3</strong><span>Presentación marco</span></div></div>
         </div>
     </section>
 
     <section id="principios" class="content-section">
         <h2 class="section-title">Principios</h2>
         <div class="cards-grid">
-            <div class="card"><h3>Política y Compromiso</h3><p>Misión alineada con la regulación y comunicación clara a los interesados.</p></div>
-            <div class="card"><h3>Supervisión e Intervención</h3><p>Personal competente y "Kill Switch" para sistemas de alto riesgo.</p></div>
-            <div class="card"><h3>Gestión de Datos</h3><p>Registro de procedencia y mitigación activa de sesgos discriminatorios.</p></div>
-            <div class="card"><h3>Ciclo de Vida Responsable</h3><p>Documentación técnica exhaustiva y planes de despliegue seguros.</p></div>
-            <div class="card"><h3>Soberanía Tecnológica</h3><p>Uso de infraestructuras soberanas evitando dependencias extranjeras críticas.</p></div>
+            <div class="card"><h3>Política y Compromiso</h3><p>Misión documentada y comunicada a las partes interesadas.</p></div>
+            <div class="card"><h3>Supervisión Humana</h3><p>Capacidad de intervención y mecanismo de parada segura (Kill Switch).</p></div>
+            <div class="card"><h3>Gestión de Datos</h3><p>Trazabilidad y medidas activas contra sesgos y discriminación.</p></div>
+            <div class="card"><h3>Ciclo de Vida</h3><p>Documentación técnica y despliegue bajo protocolos seguros.</p></div>
+            <div class="card"><h3>Soberanía</h3><p>Prioridad a infraestructuras nacionales y seguridad nacional.</p></div>
         </div>
     </section>
 
     <footer><p>© 2026 CESN. Todos los derechos reservados.</p></footer>
 
     <script>
-        // Lógica Menú Hamburguesa
         const mobileMenu = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-        const navLinks = document.querySelectorAll('nav a');
 
         mobileMenu.addEventListener('click', () => {
             mobileMenu.classList.toggle('open');
             navList.classList.toggle('active');
         });
 
-        navLinks.forEach(link => {
+        document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
                 navList.classList.remove('active');
             });
         });
 
-        // Interactividad Roadmap
         const legendItems = document.querySelectorAll('.legend-item');
         const phaseBlocks = document.querySelectorAll('.phase-block');
-
-        const highlight = (target) => {
+        const highlight = (t) => {
             phaseBlocks.forEach(b => b.style.opacity = '0.3');
-            const active = document.querySelector(`.phase-block[data-target="${target}"]`);
+            const active = document.querySelector(`.phase-block[data-target="${t}"]`);
             if(active) active.style.opacity = '1';
         };
-
         const reset = () => phaseBlocks.forEach(b => b.style.opacity = '1');
-
-        legendItems.forEach(item => {
-            item.addEventListener('mouseenter', () => highlight(item.dataset.target));
-            item.addEventListener('mouseleave', reset);
+        legendItems.forEach(i => {
+            i.addEventListener('mouseenter', () => highlight(i.dataset.target));
+            i.addEventListener('mouseleave', reset);
         });
     </script>
 </body>
