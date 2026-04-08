@@ -45,16 +45,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 5%;
+            padding: 1rem 5%;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .logo {
-            height: 40px;
+            height: 35px;
             width: auto;
         }
 
+        /* Nav Desktop */
         nav ul {
             display: flex;
             list-style: none;
@@ -64,12 +65,27 @@
         nav a {
             text-decoration: none;
             color: var(--negro);
-            font-weight: 400; /* Actualizado a normal */
+            font-weight: 400;
             transition: color 0.3s ease;
         }
 
-        nav a:hover {
-            color: var(--azul);
+        nav a:hover { color: var(--azul); }
+
+        /* Hamburguesa Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background-color: var(--negro);
+            transition: all 0.3s ease;
         }
 
         /* --- HERO --- */
@@ -79,43 +95,19 @@
             align-items: center;
             justify-content: center;
             padding: 0 10%;
-            gap: 12%; /* Incrementado el espacio entre logo y texto */
+            gap: 12%;
             margin-top: 60px;
         }
 
-        .hero-logo {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .hero-logo img {
-            max-width: 250px;
-            width: 100%;
-        }
-
-        .hero-text {
-            flex: 1.5;
-        }
-
-        .hero-text h1 {
-            font-size: 3rem;
-            line-height: 1.2;
-            color: var(--azul); /* Actualizado al azul de la paleta */
-        }
+        .hero-logo { flex: 1; display: flex; justify-content: flex-end; }
+        .hero-logo img { max-width: 250px; width: 100%; }
+        .hero-text { flex: 1.5; }
+        .hero-text h1 { font-size: 3rem; line-height: 1.2; color: var(--azul); }
 
         /* --- SECCIONES & GRID --- */
-        section.content-section {
-            padding: 6rem 10%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 4rem;
-            color: var(--azul);
-        }
-
+        section.content-section { padding: 6rem 10%; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: var(--azul); }
+        
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -140,54 +132,23 @@
             border-color: var(--negro);
         }
 
-        .card h3 {
-            font-size: 1.3rem;
-            color: var(--negro);
-        }
+        .card h3 { font-size: 1.3rem; color: var(--negro); }
+        .card p { color: var(--azul); font-size: 1rem; }
 
-        .card p {
-            color: var(--azul);
-            font-size: 1rem;
-        }
-
-        /* Fondos alternos */
         #propuesta { background-color: var(--gris); }
         #referenciales { background-color: var(--blanco); }
         #roadmap { background-color: var(--gris); }
         #principios { background-color: var(--blanco); }
 
         /* --- ROADMAP --- */
-        .timeline-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            margin: 4rem auto;
-        }
-
-        .timeline-track {
-            display: flex;
-            height: 30px;
-            border-radius: 15px;
-            background-color: #e0e0e0;
-            overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* Proporciones exactas: F3(22.2%), F2(44.4%), F1(33.3%). Suma: 100% */
-        .phase-block {
-            height: 100%;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
-        }
-
+        .timeline-wrapper { position: relative; width: 100%; max-width: 1000px; margin: 4rem auto; }
+        .timeline-track { display: flex; height: 30px; border-radius: 15px; background-color: #e0e0e0; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+        
+        .phase-block { height: 100%; transition: opacity 0.3s ease; cursor: pointer; }
         .phase-1-block { width: 33.33%; background-color: var(--azul); }
         .phase-2-block { width: 44.44%; background-color: var(--amarillo); }
         .phase-3-block { width: 22.23%; background-color: var(--negro); }
 
-        .timeline-track:hover .phase-block { opacity: 0.4; }
-        .timeline-track .phase-block:hover { opacity: 1; }
-
-        /* Marcador (33.33 + 44.44 = 77.77%). TranslateX(-50%) lo centra exactamente en la frontera */
         .marker {
             position: absolute;
             left: 77.77%;
@@ -197,122 +158,56 @@
             align-items: center;
             transform: translateX(-50%);
             z-index: 10;
-            pointer-events: none;
         }
 
-        .marker-text {
-            background-color: var(--negro);
-            color: var(--blanco);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            white-space: nowrap;
-        }
+        .marker-text { background: var(--negro); color: var(--blanco); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; white-space: nowrap; }
+        .marker-line { width: 2px; height: 50px; background-color: var(--negro); }
 
-        .marker-line {
-            width: 2px;
-            height: 50px;
-            background-color: var(--negro);
-        }
-
-        /* Leyenda */
-        .roadmap-legend {
-            display: flex;
-            justify-content: space-between;
-            gap: 2rem;
-            margin-top: 3rem;
-            flex-wrap: nowrap; /* Fila única estricta */
-        }
-
-        .legend-item {
-            flex: 1;
-            display: flex;
-            align-items: flex-start; /* Alinea los puntos arriba si hay dos líneas de texto */
-            gap: 12px;
-            cursor: pointer;
-            padding: 15px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .legend-item:hover {
-            background-color: var(--blanco);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .color-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            margin-top: 4px; /* Compensación visual con la primera línea de texto */
-        }
-
-        .dot-1 { background-color: var(--azul); }
-        .dot-2 { background-color: var(--amarillo); }
-        .dot-3 { background-color: var(--negro); }
-
-        .legend-text {
-            line-height: 1.4;
-        }
-
-        .legend-text strong {
-            display: block;
-            color: var(--negro);
-            margin-bottom: 4px;
-        }
-
-        .legend-text span {
-            font-size: 0.9rem;
-            color: var(--azul);
-        }
+        .roadmap-legend { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; }
+        .legend-item { flex: 1; display: flex; gap: 12px; cursor: pointer; padding: 15px; border-radius: 8px; transition: all 0.3s ease; }
+        .color-dot { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+        .dot-1 { background: var(--azul); } .dot-2 { background: var(--amarillo); } .dot-3 { background: var(--negro); }
+        .legend-text strong { display: block; color: var(--negro); margin-bottom: 2px; }
+        .legend-text span { font-size: 0.85rem; color: var(--azul); display: block; }
 
         /* --- FOOTER --- */
-        footer {
-            background-color: var(--azul);
-            padding: 2rem;
-            text-align: center;
-        }
+        footer { background: var(--azul); padding: 2rem; text-align: center; }
+        footer p { color: var(--blanco); font-style: italic; font-size: 0.875rem; }
 
-        footer p {
-            color: var(--blanco);
-            font-style: italic;
-            font-size: 0.875rem;
-        }
-
-        /* --- RESPONSIVE MOBILE OPTIMIZATION --- */
-        @media (max-width: 1024px) {
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            #hero {
-                flex-direction: column;
-                text-align: center;
-                gap: 2rem;
-                padding-top: 4rem;
-            }
-            .hero-logo img {
-                max-width: 150px; /* Logo más pequeño en móvil */
-            }
-            .hero-text h1 {
-                font-size: 2rem; /* Texto hero más pequeño en móvil */
-            }
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            .roadmap-legend {
-                flex-direction: column;
-            }
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 850px) {
+            .menu-toggle { display: flex; }
+            
             nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+                position: fixed;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                width: 70%;
+                background-color: var(--blanco);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
             }
+
+            nav ul.active { right: 0; }
+            
+            /* Animación X Hamburguesa */
+            .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+            .menu-toggle.open span:nth-child(2) { opacity: 0; }
+            .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+            #hero { flex-direction: column; text-align: center; gap: 3rem; padding-top: 2rem; }
+            .hero-logo img { max-width: 140px; }
+            .hero-text h1 { font-size: 1.8rem; }
+
+            .cards-grid { grid-template-columns: 1fr; }
+            .roadmap-legend { flex-direction: column; }
+            .legend-item { padding: 10px; }
+            .section-title { font-size: 2rem; margin-bottom: 2rem; }
+            section.content-section { padding: 4rem 8%; }
         }
     </style>
 </head>
@@ -320,10 +215,17 @@
 
     <header>
         <a href="#hero">
-            <img src="CESN.svg" alt="CESN Logo" class="logo">
+            <img src="CESN.svg" alt="CESN" class="logo">
         </a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
         <nav>
-            <ul>
+            <ul id="nav-list">
                 <li><a href="#propuesta">Propuesta</a></li>
                 <li><a href="#referenciales">Referenciales</a></li>
                 <li><a href="#roadmap">Roadmap</a></li>
@@ -349,12 +251,12 @@
                 <p>Necesitamos una única referencia reguladora para los modelos de IA que serán aplicados en defensa.</p>
             </div>
             <div class="card">
-                <h3>Basado en certificaciones reconocidas</h3>
-                <p>Usamos 6 regulaciones existentes de referencia, para cubrir todos los requisitos.</p>
+                <h3>Certificaciones reconocidas</h3>
+                <p>Usamos 6 regulaciones existentes de referencia, para cubrir todos los requisitos actuales.</p>
             </div>
             <div class="card">
-                <h3>Múltiples niveles de cumplimiento</h3>
-                <p>Cada auditoría concluye con un nivel de cumplimiento, en vez de un resultado binario de aprobado o suspendido.</p>
+                <h3>Niveles de cumplimiento</h3>
+                <p>Cada auditoría concluye con un nivel de cumplimiento, en vez de un resultado binario.</p>
             </div>
         </div>
     </section>
@@ -362,140 +264,81 @@
     <section id="referenciales" class="content-section">
         <h2 class="section-title">Referenciales</h2>
         <div class="cards-grid">
-            <div class="card">
-                <h3>ENS Alto</h3>
-                <p>La base para la seguridad de los sistemas de información.</p>
-            </div>
-            <div class="card">
-                <h3>AI Act</h3>
-                <p>Para cubrir la regulación Europea.</p>
-            </div>
-            <div class="card">
-                <h3>ISO 27001</h3>
-                <p>Reforzar la seguridad de los sistemas de la información.</p>
-            </div>
-            <div class="card">
-                <h3>ISO 42001</h3>
-                <p>La base de cumplimiento de modelos de IA.</p>
-            </div>
-            <div class="card">
-                <h3>ISO 31000</h3>
-                <p>La base de cumplimiento de gestión de riesgos.</p>
-            </div>
-            <div class="card">
-                <h3>Ley de Contratación 2011</h3>
-                <p>La base de cumplimiento del sector de defensa español.</p>
-            </div>
+            <div class="card"><h3>ENS Alto</h3><p>Seguridad de los sistemas de información.</p></div>
+            <div class="card"><h3>AI Act</h3><p>Regulación Europea de Inteligencia Artificial.</p></div>
+            <div class="card"><h3>ISO 27001</h3><p>Gestión de la seguridad de la información.</p></div>
+            <div class="card"><h3>ISO 42001</h3><p>Estándar para la gestión de IA.</p></div>
+            <div class="card"><h3>ISO 31000</h3><p>Gestión de riesgos corporativos.</p></div>
+            <div class="card"><h3>Ley Contratación 2011</h3><p>Marco legal para el sector defensa.</p></div>
         </div>
     </section>
 
     <section id="roadmap" class="content-section">
-        <h2 class="section-title">Roadmap del Proyecto</h2>
-        
+        <h2 class="section-title">Roadmap</h2>
         <div class="timeline-wrapper">
             <div class="marker">
                 <div class="marker-text">Estamos aquí</div>
                 <div class="marker-line"></div>
             </div>
-
             <div class="timeline-track">
                 <div class="phase-block phase-1-block" data-target="phase1"></div>
                 <div class="phase-block phase-2-block" data-target="phase2"></div>
                 <div class="phase-block phase-3-block" data-target="phase3"></div>
             </div>
         </div>
-
         <div class="roadmap-legend">
-            <div class="legend-item" data-target="phase1">
-                <div class="color-dot dot-1"></div>
-                <div class="legend-text">
-                    <strong>Fase 1</strong>
-                    <span>Estudio y selección de los 6 referenciales</span>
-                </div>
-            </div>
-            <div class="legend-item" data-target="phase2">
-                <div class="color-dot dot-2"></div>
-                <div class="legend-text">
-                    <strong>Fase 2</strong>
-                    <span>Unificación de criterios para la creación de un único marco regulatorio</span>
-                </div>
-            </div>
-            <div class="legend-item" data-target="phase3">
-                <div class="color-dot dot-3"></div>
-                <div class="legend-text">
-                    <strong>Fase 3</strong>
-                    <span>Presentación de marco regulatorio</span>
-                </div>
-            </div>
+            <div class="legend-item" data-target="phase1"><div class="color-dot dot-1"></div><div class="legend-text"><strong>Fase 1</strong><span>Estudio de referenciales</span></div></div>
+            <div class="legend-item" data-target="phase2"><div class="color-dot dot-2"></div><div class="legend-text"><strong>Fase 2</strong><span>Unificación de criterios</span></div></div>
+            <div class="legend-item" data-target="phase3"><div class="color-dot dot-3"></div><div class="legend-text"><strong>Fase 3</strong><span>Presentación del marco</span></div></div>
         </div>
     </section>
 
     <section id="principios" class="content-section">
         <h2 class="section-title">Principios</h2>
         <div class="cards-grid">
-            <div class="card">
-                <h3>Política de IA y Compromiso</h3>
-                <p>Define una misión clara alineada con la regulación vigente, asegurando que la política esté documentada y comunicada a todas las partes interesadas.</p>
-            </div>
-            <div class="card">
-                <h3>Supervisión Humana e Intervención</h3>
-                <p>Incluye la obligación de designar personal competente para supervisar el sistema y la implementación de un "Kill Switch" para sistemas de alto riesgo.</p>
-            </div>
-            <div class="card">
-                <h3>Gestión de Datos y Mitigación de Sesgos</h3>
-                <p>Exige procesos para registrar la procedencia de los datos y medidas para detectar y prevenir discriminaciones en los modelos.</p>
-            </div>
-            <div class="card">
-                <h3>Ciclo de Vida Responsable</h3>
-                <p>Establece requisitos de documentación técnica, registros automáticos de actividad y planes de despliegue seguros.</p>
-            </div>
-            <div class="card">
-                <h3>Soberanía Tecnológica</h3>
-                <p>Se prioriza el uso de infraestructuras soberanas, evitando la dependencia de nubes extranjeras que no cumplen con los requisitos de seguridad nacional.</p>
-            </div>
+            <div class="card"><h3>Política y Compromiso</h3><p>Misión alineada con la regulación y comunicación clara a los interesados.</p></div>
+            <div class="card"><h3>Supervisión e Intervención</h3><p>Personal competente y "Kill Switch" para sistemas de alto riesgo.</p></div>
+            <div class="card"><h3>Gestión de Datos</h3><p>Registro de procedencia y mitigación activa de sesgos discriminatorios.</p></div>
+            <div class="card"><h3>Ciclo de Vida Responsable</h3><p>Documentación técnica exhaustiva y planes de despliegue seguros.</p></div>
+            <div class="card"><h3>Soberanía Tecnológica</h3><p>Uso de infraestructuras soberanas evitando dependencias extranjeras críticas.</p></div>
         </div>
     </section>
 
-    <footer>
-        <p>© 2026 CESN. Todos los derechos reservados.</p>
-    </footer>
+    <footer><p>© 2026 CESN. Todos los derechos reservados.</p></footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const legendItems = document.querySelectorAll('.legend-item');
-            const phaseBlocks = document.querySelectorAll('.phase-block');
+        // Lógica Menú Hamburguesa
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const navLinks = document.querySelectorAll('nav a');
 
-            const activateHighlight = (target) => {
-                phaseBlocks.forEach(b => b.style.opacity = '0.4');
-                const activeBlock = document.querySelector(`.phase-block[data-target="${target}"]`);
-                if(activeBlock) activeBlock.style.opacity = '1';
-                
-                const activeLegend = document.querySelector(`.legend-item[data-target="${target}"]`);
-                if(activeLegend) {
-                    activeLegend.style.backgroundColor = 'var(--blanco)';
-                    activeLegend.style.transform = 'translateY(-3px)';
-                    activeLegend.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)';
-                }
-            };
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            navList.classList.toggle('active');
+        });
 
-            const resetHighlight = () => {
-                phaseBlocks.forEach(b => b.style.opacity = '');
-                legendItems.forEach(l => {
-                    l.style.backgroundColor = '';
-                    l.style.transform = '';
-                    l.style.boxShadow = '';
-                });
-            };
-
-            legendItems.forEach(item => {
-                item.addEventListener('mouseenter', () => activateHighlight(item.dataset.target));
-                item.addEventListener('mouseleave', resetHighlight);
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                navList.classList.remove('active');
             });
+        });
 
-            phaseBlocks.forEach(block => {
-                block.addEventListener('mouseenter', () => activateHighlight(block.dataset.target));
-                block.addEventListener('mouseleave', resetHighlight);
-            });
+        // Interactividad Roadmap
+        const legendItems = document.querySelectorAll('.legend-item');
+        const phaseBlocks = document.querySelectorAll('.phase-block');
+
+        const highlight = (target) => {
+            phaseBlocks.forEach(b => b.style.opacity = '0.3');
+            const active = document.querySelector(`.phase-block[data-target="${target}"]`);
+            if(active) active.style.opacity = '1';
+        };
+
+        const reset = () => phaseBlocks.forEach(b => b.style.opacity = '1');
+
+        legendItems.forEach(item => {
+            item.addEventListener('mouseenter', () => highlight(item.dataset.target));
+            item.addEventListener('mouseleave', reset);
         });
     </script>
 </body>
