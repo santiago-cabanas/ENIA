@@ -39,7 +39,7 @@
             width: 100%;
             background-color: var(--blanco);
             display: flex;
-            justify-content: space-between; /* Logo a la izq, Menú a la der */
+            justify-content: space-between; /* Logo a la izquierda, Contenedor a la derecha */
             align-items: center;
             padding: 1rem 5%;
             z-index: 1000;
@@ -65,15 +65,16 @@
             transition: color 0.3s ease;
         }
 
-        /* Botón Hamburguesa (Móvil) */
+        /* Botón Hamburguesa */
         .menu-toggle {
             display: none; /* Oculto en desktop */
             width: 30px;
-            height: 24px;
+            height: 22px;
             position: relative;
             cursor: pointer;
             z-index: 1002;
-            /* Eliminamos márgenes para que flex-end de header haga su trabajo */
+            /* Forzamos que se pegue al borde derecho del contenedor flex */
+            margin-left: auto; 
         }
 
         .menu-toggle span {
@@ -83,23 +84,19 @@
             width: 100%;
             background: var(--negro);
             border-radius: 2px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
             transition: .25s ease-in-out;
         }
 
-        /* Posicionamiento de las 3 barras */
         .menu-toggle span:nth-child(1) { top: 0px; }
-        .menu-toggle span:nth-child(2) { top: 10px; width: 70%; left: 30%; } /* Barra media corta a la derecha */
+        .menu-toggle span:nth-child(2) { top: 10px; width: 70%; right: 0; }
         .menu-toggle span:nth-child(3) { top: 20px; }
 
         /* Transformación a X */
         .menu-toggle.open span:nth-child(1) { top: 10px; transform: rotate(135deg); }
-        .menu-toggle.open span:nth-child(2) { opacity: 0; left: -60px; }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; right: -20px; }
         .menu-toggle.open span:nth-child(3) { top: 10px; transform: rotate(-135deg); }
 
-        /* --- SECCIONES --- */
+        /* --- HERO --- */
         #hero {
             min-height: 100vh;
             display: flex;
@@ -109,32 +106,17 @@
             gap: 12%;
             margin-top: 60px;
         }
-
         .hero-logo img { max-width: 250px; width: 100%; }
         .hero-text h1 { font-size: 3rem; color: var(--azul); line-height: 1.2; }
 
+        /* --- SECCIONES --- */
         section.content-section { padding: 6rem 10%; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: var(--azul); }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--blanco);
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid transparent;
-            transition: 0.3s ease;
-        }
-
-        .card:hover { transform: translateY(-8px); border-color: var(--negro); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .card { background: var(--blanco); padding: 2.5rem 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid transparent; transition: 0.3s; }
+        .card:hover { transform: translateY(-8px); border-color: var(--negro); }
         .card h3 { margin-bottom: 1rem; }
         .card p { color: var(--azul); }
-
         #propuesta, #roadmap { background: var(--gris); }
 
         /* --- ROADMAP --- */
@@ -144,19 +126,9 @@
         .phase-1-block { width: 33.33%; background: var(--azul); }
         .phase-2-block { width: 44.44%; background: var(--amarillo); }
         .phase-3-block { width: 22.23%; background: var(--negro); }
-
-        .marker {
-            position: absolute;
-            left: 77.77%;
-            top: -40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transform: translateX(-50%);
-        }
+        .marker { position: absolute; left: 77.77%; top: -40px; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%); }
         .marker-text { background: var(--negro); color: var(--blanco); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; }
         .marker-line { width: 2px; height: 50px; background: var(--negro); }
-
         .roadmap-legend { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; }
         .legend-item { flex: 1; display: flex; gap: 10px; cursor: pointer; }
         .color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
@@ -166,33 +138,40 @@
 
         /* --- MOBILE --- */
         @media (max-width: 850px) {
-            header { padding: 1rem 5%; }
+            header { 
+                padding: 1rem 8%; /* Aumentamos padding lateral para control visual */
+                justify-content: space-between; 
+            }
             
-            .menu-toggle { display: block; } /* Mostrar icono pegado a la derecha por flex del header */
+            .menu-toggle { 
+                display: block; /* Ahora se fuerza a la derecha por margin-left: auto */
+            } 
 
             nav ul {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 75%;
+                width: 80%;
                 height: 100vh;
                 background: var(--blanco);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 transition: 0.4s ease-in-out;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                z-index: 1001;
             }
 
             nav ul.active { right: 0; }
             nav ul li { margin: 1.5rem 0; }
-            nav a { font-size: 1.3rem; }
+            nav a { font-size: 1.4rem; }
 
-            #hero { flex-direction: column; text-align: center; padding-top: 5rem; }
-            .hero-logo img { max-width: 150px; }
+            #hero { flex-direction: column; text-align: center; padding-top: 5rem; gap: 2rem;}
+            .hero-logo img { max-width: 140px; }
             .hero-text h1 { font-size: 1.8rem; }
             .cards-grid { grid-template-columns: 1fr; }
-            .roadmap-legend { flex-direction: column; gap: 1.5rem; }
+            .roadmap-legend { flex-direction: column; gap: 1.2rem; }
+            .section-title { font-size: 2rem; margin-bottom: 2.5rem; }
         }
     </style>
 </head>
@@ -229,7 +208,7 @@
         <div class="cards-grid">
             <div class="card"><h3>Un marco unificado</h3><p>Una única referencia reguladora para modelos de IA en defensa.</p></div>
             <div class="card"><h3>Certificaciones</h3><p>Basado en 6 regulaciones existentes de referencia internacional.</p></div>
-            <div class="card"><h3>Cumplimiento</h3><p>Resultados por niveles de cumplimiento, no solo apto/no apto.</p></div>
+            <div class="card"><h3>Cumplimiento</h3><p>Resultados por niveles de cumplimiento progresivo.</p></div>
         </div>
     </section>
 
@@ -268,11 +247,11 @@
     <section id="principios" class="content-section">
         <h2 class="section-title">Principios</h2>
         <div class="cards-grid">
-            <div class="card"><h3>Política y Compromiso</h3><p>Misión documentada y comunicada a las partes interesadas.</p></div>
-            <div class="card"><h3>Supervisión Humana</h3><p>Capacidad de intervención y mecanismo de parada segura (Kill Switch).</p></div>
-            <div class="card"><h3>Gestión de Datos</h3><p>Trazabilidad y medidas activas contra sesgos y discriminación.</p></div>
-            <div class="card"><h3>Ciclo de Vida</h3><p>Documentación técnica y despliegue bajo protocolos seguros.</p></div>
-            <div class="card"><h3>Soberanía</h3><p>Prioridad a infraestructuras nacionales y seguridad nacional.</p></div>
+            <div class="card"><h3>Política y Compromiso</h3><p>Misión documentada y comunicada a todas las partes.</p></div>
+            <div class="card"><h3>Supervisión Humana</h3><p>Intervención directa y mecanismo Kill Switch.</p></div>
+            <div class="card"><h3>Gestión de Datos</h3><p>Trazabilidad y prevención activa de sesgos.</p></div>
+            <div class="card"><h3>Ciclo de Vida</h3><p>Registros automáticos y despliegue seguro.</p></div>
+            <div class="card"><h3>Soberanía</h3><p>Uso prioritario de infraestructuras nacionales.</p></div>
         </div>
     </section>
 
