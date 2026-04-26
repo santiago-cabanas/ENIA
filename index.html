@@ -17,6 +17,13 @@
             --amarillo: #FFED00;
             --negro: #000000;
             --azul-electrico: #007bff;
+            
+            /* Colores Medallas */
+            --diamante-1: #e0f7fa; --diamante-2: #26c6da; --diamante-borde: #00838f;
+            --oro-1: #fff8e1; --oro-2: #ffc107; --oro-borde: #ff8f00;
+            --plata-1: #f5f5f5; --plata-2: #bdbdbd; --plata-borde: #757575;
+            --bronce-1: #fbe9e7; --bronce-2: #ff8a65; --bronce-borde: #d84315;
+            --metal-1: #eceff1; --metal-2: #90a4ae; --metal-borde: #455a64;
         }
 
         * {
@@ -69,27 +76,15 @@
             align-items: center;
             justify-content: center;
             padding: 0 10%;
-            gap: 8rem; /* Espacio generoso entre logo y texto */
+            gap: 8rem;
             margin-top: 60px;
         }
 
-        .hero-logo img {
-            width: 320px; /* Logo más grande */
-            height: auto;
-        }
+        .hero-logo img { width: 320px; height: auto; }
+        .hero-text { max-width: 550px; }
+        .hero-text h1 { font-size: 2.8rem; color: var(--azul); line-height: 1.2; font-weight: 600; }
 
-        .hero-text {
-            max-width: 550px; /* Textbox menos ancho */
-        }
-
-        .hero-text h1 {
-            font-size: 2.8rem;
-            color: var(--azul);
-            line-height: 1.2;
-            font-weight: 600;
-        }
-
-        /* --- SECCIONES --- */
+        /* --- SECCIONES GENERICAS --- */
         section.content-section { padding: 6rem 10%; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: var(--azul); }
 
@@ -113,45 +108,106 @@
         .card p { color: var(--azul); font-size: 1rem; }
         .link-sgs { color: var(--azul-electrico); text-decoration: underline; font-weight: 600; }
 
-        #propuesta, #roadmap { background: var(--gris); }
+        #propuesta, #niveles { background: var(--gris); }
 
-        /* --- ROADMAP --- */
-        .timeline-wrapper { position: relative; width: 100%; max-width: 1000px; margin: 6rem auto 4rem; }
-        .timeline-track { display: flex; height: 30px; border-radius: 15px; background: #e0e0e0; overflow: hidden; }
-        .phase-block { height: 100%; cursor: pointer; transition: 0.3s; }
-        .phase-1-block { width: 33.33%; background: var(--azul); }
-        .phase-2-block { width: 44.44%; background: var(--amarillo); }
-        .phase-3-block { width: 22.23%; background: var(--negro); }
+        /* --- NIVELES (NUEVA SECCIÓN) --- */
+        .niveles-container { display: flex; flex-direction: column; gap: 2rem; max-width: 1200px; margin: 0 auto; }
 
-        .marker {
-            position: absolute;
-            left: 77.77%;
-            top: -65px; /* Más arriba */
+        .nivel-card {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            border-left: 6px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nivel-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Border highlights per level */
+        .nivel-card.diamante:hover { border-left-color: var(--diamante-2); }
+        .nivel-card.oro:hover { border-left-color: var(--oro-2); }
+        .nivel-card.plata:hover { border-left-color: var(--plata-2); }
+        .nivel-card.bronce:hover { border-left-color: var(--bronce-2); }
+        .nivel-card.metal:hover { border-left-color: var(--metal-2); }
+
+        /* Left Side: Medal & Title */
+        .nivel-left {
             display: flex;
             flex-direction: column;
             align-items: center;
-            transform: translateX(-50%);
+            justify-content: center;
+            min-width: 150px;
+            text-align: center;
+            gap: 1rem;
         }
-        .marker-text { 
-            background: var(--negro); 
-            color: var(--blanco); 
-            padding: 6px 20px; /* Más espacio interno */
-            border-radius: 20px; 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            margin-bottom: 8px; 
-            white-space: nowrap; /* Una sola fila */
+
+        .nivel-left h3 {
+            font-size: 1.2rem;
+            color: var(--azul);
+            line-height: 1.2;
         }
-        .marker-line { width: 2px; height: 65px; background: var(--negro); }
 
-        .roadmap-legend { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: 3rem; }
-        .legend-item { flex: 1; display: flex; gap: 10px; cursor: pointer; }
-        .color-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-        .dot-1 { background: var(--azul); } .dot-2 { background: var(--amarillo); } .dot-3 { background: var(--negro); }
+        .medal {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset 0 -4px 10px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--blanco);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .medal::after {
+            content: '';
+            position: absolute;
+            top: 5px; left: 10px; width: 20px; height: 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            transform: rotate(-45deg);
+        }
 
+        /* Medal Colors */
+        .medal.diamante { background: linear-gradient(135deg, var(--diamante-1), var(--diamante-2)); border: 3px solid var(--diamante-borde); color: var(--diamante-borde); }
+        .medal.oro { background: linear-gradient(135deg, var(--oro-1), var(--oro-2)); border: 3px solid var(--oro-borde); }
+        .medal.plata { background: linear-gradient(135deg, var(--plata-1), var(--plata-2)); border: 3px solid var(--plata-borde); }
+        .medal.bronce { background: linear-gradient(135deg, var(--bronce-1), var(--bronce-2)); border: 3px solid var(--bronce-borde); }
+        .medal.metal { background: linear-gradient(135deg, var(--metal-1), var(--metal-2)); border: 3px solid var(--metal-borde); }
+
+        /* Right Side: Data grid */
+        .nivel-right {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            border-left: 1px solid #e0e0e0;
+            padding-left: 3rem;
+        }
+
+        .info-block { display: flex; flex-direction: column; gap: 0.5rem; }
+        .info-block h4 { font-size: 0.95rem; color: var(--negro); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--amarillo); display: inline-block; padding-bottom: 4px; align-self: flex-start; }
+        .info-block p { font-size: 1rem; color: var(--azul); line-height: 1.4; }
+
+        /* --- FOOTER --- */
         footer { background: var(--azul); padding: 2.5rem; text-align: center; color: var(--blanco); font-style: italic; font-size: 0.8rem; }
 
-        /* --- MOBILE --- */
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 950px) {
+            .nivel-card { flex-direction: column; gap: 2rem; padding: 2rem; text-align: center; }
+            .nivel-right { grid-template-columns: 1fr; border-left: none; padding-left: 0; border-top: 1px solid #e0e0e0; padding-top: 2rem; gap: 1.5rem; }
+            .info-block h4 { align-self: center; } /* Centra los títulos en móvil */
+            .nivel-left { min-width: auto; }
+        }
+
         @media (max-width: 850px) {
             header { padding: 1rem 8%; }
             .menu-toggle { display: block; }
@@ -164,12 +220,7 @@
             .hero-text h1 { font-size: 1.8rem; }
 
             .grid-2x2, .grid-3x2 { grid-template-columns: 1fr; }
-            .roadmap-legend { flex-direction: column; }
-            
-            /* Ajuste burbuja móvil */
-            .marker { top: -55px; }
-            .marker-text { padding: 8px 25px; font-size: 0.9rem; }
-            .marker-line { height: 55px; }
+            section.content-section { padding: 4rem 8%; }
         }
     </style>
 </head>
@@ -182,7 +233,7 @@
             <ul id="nav-list">
                 <li><a href="#propuesta">Propuesta</a></li>
                 <li><a href="#referenciales">Referenciales</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#niveles">Niveles</a></li>
                 <li><a href="#principios">Principios</a></li>
             </ul>
         </nav>
@@ -231,32 +282,116 @@
         </div>
     </section>
 
-    <section id="roadmap" class="content-section">
-        <h2 class="section-title">Roadmap</h2>
-        <div class="timeline-wrapper">
-            <div class="marker">
-                <div class="marker-text">Estamos aquí</div>
-                <div class="marker-line"></div>
+    <section id="niveles" class="content-section">
+        <h2 class="section-title">Niveles de Cumplimiento</h2>
+        
+        <div class="niveles-container">
+            
+            <div class="nivel-card diamante">
+                <div class="nivel-left">
+                    <div class="medal diamante">5</div>
+                    <h3>Nivel 5<br>Diamante</h3>
+                </div>
+                <div class="nivel-right">
+                    <div class="info-block">
+                        <h4>Cumplimiento</h4>
+                        <p>Cumple de 80% a 100% del ENIA</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>A qué pueden optar</h4>
+                        <p>Muy viable a corto, medio y largo plazo</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>¿Qué tiene la empresa?</h4>
+                        <p>Tiene ENS Alto, ISO 27k1 y cumple ciertos aspectos de ISO 31k, ISO 42k, AI Act</p>
+                    </div>
+                </div>
             </div>
-            <div class="timeline-track">
-                <div class="phase-block phase-1-block" data-target="phase1"></div>
-                <div class="phase-block phase-2-block" data-target="phase2"></div>
-                <div class="phase-block phase-3-block" data-target="phase3"></div>
+
+            <div class="nivel-card oro">
+                <div class="nivel-left">
+                    <div class="medal oro">4</div>
+                    <h3>Nivel 4<br>Oro</h3>
+                </div>
+                <div class="nivel-right">
+                    <div class="info-block">
+                        <h4>Cumplimiento</h4>
+                        <p>Cumple de 60% a 80% del ENIA</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>A qué pueden optar</h4>
+                        <p>Viable a corto, medio y largo plazo</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>¿Qué tiene la empresa?</h4>
+                        <p>Tiene ambos: ENS Medio + ISO 27k1</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="roadmap-legend">
-            <div class="legend-item" data-target="phase1">
-                <div class="color-dot dot-1"></div>
-                <div class="legend-text"><strong>Fase 1: Estudio Referenciales</strong><span>Análisis de normativas base</span></div>
+
+            <div class="nivel-card plata">
+                <div class="nivel-left">
+                    <div class="medal plata">3</div>
+                    <h3>Nivel 3<br>Plata</h3>
+                </div>
+                <div class="nivel-right">
+                    <div class="info-block">
+                        <h4>Cumplimiento</h4>
+                        <p>Cumple de 40% a 60% del ENIA</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>A qué pueden optar</h4>
+                        <p>Viable a corto y medio</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>¿Qué tiene la empresa?</h4>
+                        <p>El que tiene ENS Medio o ISO 27k1</p>
+                    </div>
+                </div>
             </div>
-            <div class="legend-item" data-target="phase2">
-                <div class="color-dot dot-2"></div>
-                <div class="legend-text"><strong>Fase 2: Unificación Criterios</strong><span>Creación del marco común</span></div>
+
+            <div class="nivel-card bronce">
+                <div class="nivel-left">
+                    <div class="medal bronce">2</div>
+                    <h3>Nivel 2<br>Bronce</h3>
+                </div>
+                <div class="nivel-right">
+                    <div class="info-block">
+                        <h4>Cumplimiento</h4>
+                        <p>Cumple de 20% a 40% del ENIA</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>A qué pueden optar</h4>
+                        <p>Solo viable a medio plazo (ni corto ni largo)<br>Viabilidad de ciclo de vida: 1 año</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>¿Qué tiene la empresa?</h4>
+                        <p>El que tiene el Lince o ENS Medio</p>
+                    </div>
+                </div>
             </div>
-            <div class="legend-item" data-target="phase3">
-                <div class="color-dot dot-3"></div>
-                <div class="legend-text"><strong>Fase 3: Presentación Marco</strong><span>Lanzamiento del referencial</span></div>
+
+            <div class="nivel-card metal">
+                <div class="nivel-left">
+                    <div class="medal metal">1</div>
+                    <h3>Nivel 1<br>Metal</h3>
+                </div>
+                <div class="nivel-right">
+                    <div class="info-block">
+                        <h4>Cumplimiento</h4>
+                        <p>Cumple de 0% a 20% del ENIA</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>A qué pueden optar</h4>
+                        <p>No viable a medio y largo plazo</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>¿Qué tiene la empresa?</h4>
+                        <p>Únicamente tiene Lince</p>
+                    </div>
+                </div>
             </div>
+
         </div>
     </section>
 
@@ -278,24 +413,21 @@
     <footer><p>© 2026 CESN. Todos los derechos reservados.</p></footer>
 
     <script>
+        // Funcionalidad Menú Hamburguesa Móvil
         const mobileMenu = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
+        const navLinks = document.querySelectorAll('nav a');
+
         mobileMenu.addEventListener('click', () => {
             mobileMenu.classList.toggle('open');
             navList.classList.toggle('active');
         });
 
-        const legendItems = document.querySelectorAll('.legend-item');
-        const phaseBlocks = document.querySelectorAll('.phase-block');
-        const highlight = (t) => {
-            phaseBlocks.forEach(b => b.style.opacity = '0.3');
-            const active = document.querySelector(`.phase-block[data-target="${t}"]`);
-            if(active) active.style.opacity = '1';
-        };
-        const reset = () => phaseBlocks.forEach(b => b.style.opacity = '1');
-        legendItems.forEach(i => {
-            i.addEventListener('mouseenter', () => highlight(i.dataset.target));
-            i.addEventListener('mouseleave', reset);
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                navList.classList.remove('active');
+            });
         });
     </script>
 </body>
