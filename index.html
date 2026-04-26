@@ -73,9 +73,21 @@
             margin-top: 60px;
         }
 
-        .hero-logo img { width: 320px; height: auto; }
-        .hero-text { max-width: 550px; }
-        .hero-text h1 { font-size: 2.8rem; color: var(--azul); line-height: 1.2; font-weight: 600; }
+        .hero-logo img {
+            width: 320px; /* Logo grande */
+            height: auto;
+        }
+
+        .hero-text {
+            max-width: 550px; /* Textbox estrecho para que respire */
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            color: var(--azul);
+            line-height: 1.2;
+            font-weight: 600;
+        }
 
         /* --- SECCIONES GENERICAS --- */
         section.content-section { padding: 6rem 10%; }
@@ -96,14 +108,14 @@
             flex-direction: column;
             gap: 1rem;
         }
-        .card:hover { transform: translateY(-8px); border-color: var(--negro); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+        .card:hover { transform: translateY(-8px); border-color: var(--negro); }
         .card h3 { font-size: 1.3rem; color: var(--negro); }
         .card p { color: var(--azul); font-size: 1rem; }
         .link-sgs { color: var(--azul-electrico); text-decoration: underline; font-weight: 600; }
 
         #propuesta, #niveles { background: var(--gris); }
 
-        /* --- NIVELES (MEDALLAS REALISTAS) --- */
+        /* --- SECCION NIVELES (MEDALLAS REALISTAS) --- */
         .niveles-container { display: flex; flex-direction: column; gap: 2rem; max-width: 1200px; margin: 0 auto; }
 
         .nivel-card {
@@ -115,15 +127,9 @@
             gap: 3rem;
             align-items: center;
             border-left: 6px solid transparent;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+            transition: 0.3s ease;
         }
         .nivel-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
-
-        .nivel-card.diamante:hover { border-left-color: #80deea; }
-        .nivel-card.oro:hover { border-left-color: #f3c623; }
-        .nivel-card.plata:hover { border-left-color: #cfd8dc; }
-        .nivel-card.bronce:hover { border-left-color: #cd7f32; }
-        .nivel-card.metal:hover { border-left-color: #78909c; }
 
         .nivel-left {
             display: flex;
@@ -135,120 +141,45 @@
             gap: 1rem;
         }
 
-        .nivel-left h3 { font-size: 1.2rem; color: var(--azul); line-height: 1.2; }
-
-        /* Estructura Base de la Medalla */
         .medal {
-            width: 75px;
-            height: 75px;
+            width: 75px; height: 75px;
             border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; font-weight: 700;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        /* Borde interior brillante de la moneda */
-        .medal::before {
-            content: '';
-            position: absolute;
-            top: 4px; left: 4px; right: 4px; bottom: 4px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.4);
-            box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
-            pointer-events: none;
-            z-index: 1;
         }
 
-        .medal span {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 1. TEXTURA DIAMANTE REALISTA */
+        /* Diamante */
         .medal.diamante {
-            /* Efecto cristal/faceta usando conic-gradient con cortes duros */
-            background: conic-gradient(from 15deg, #e0f7fa 0deg, #b2ebf2 45deg, #ffffff 90deg, #80deea 135deg, #e0f7fa 180deg, #4dd0e1 225deg, #ffffff 270deg, #b2ebf2 315deg, #e0f7fa 360deg);
-            box-shadow: 
-                inset 0 0 10px rgba(0, 131, 143, 0.5), 
-                inset 2px 2px 5px rgba(255, 255, 255, 0.9), 
-                0 6px 10px rgba(0,0,0,0.2), 
-                0 0 15px rgba(128, 222, 234, 0.4); /* Resplandor */
-            border: 2px solid #b2ebf2;
+            background: conic-gradient(from 15deg, #e0f7fa, #b2ebf2, #ffffff, #80deea, #e0f7fa);
+            border: 2px solid #b2ebf2; color: #006064;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.8), 0 5px 15px rgba(0,0,0,0.1);
         }
-        .medal.diamante span {
-            color: #006064;
-            /* Efecto grabado en cristal */
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8), -1px -1px 1px rgba(0, 96, 100, 0.5);
-        }
-
-        /* 2. TEXTURA ORO REALISTA */
+        /* Oro */
         .medal.oro {
-            background: conic-gradient(#f3c623 0deg, #d39818 60deg, #fdf0a6 120deg, #d39818 180deg, #f3c623 240deg, #a67b1e 300deg, #f3c623 360deg);
-            box-shadow: 
-                inset 0 0 8px rgba(139, 69, 19, 0.6), 
-                inset -2px -2px 6px rgba(0,0,0,0.3),
-                inset 2px 2px 6px rgba(255,255,255,0.7),
-                0 5px 8px rgba(0,0,0,0.25);
-            border: 2px solid #d39818;
+            background: conic-gradient(#f3c623, #d39818, #fdf0a6, #d39818, #f3c623);
+            border: 2px solid #d39818; color: #5c3a21;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 5px 15px rgba(0,0,0,0.15);
         }
-        .medal.oro span {
-            color: #5c3a21;
-            /* Efecto troquelado hundido (grabado) */
-            text-shadow: -1px -1px 1px rgba(0,0,0,0.4), 1px 1px 1px rgba(253, 240, 166, 0.8);
-        }
-
-        /* 3. TEXTURA PLATA REALISTA */
+        /* Plata */
         .medal.plata {
-            background: conic-gradient(#cfd8dc 0deg, #90a4ae 60deg, #ffffff 120deg, #90a4ae 180deg, #cfd8dc 240deg, #607d8b 300deg, #cfd8dc 360deg);
-            box-shadow: 
-                inset 0 0 8px rgba(55, 71, 79, 0.5), 
-                inset -2px -2px 6px rgba(0,0,0,0.2),
-                inset 2px 2px 6px rgba(255,255,255,0.8),
-                0 5px 8px rgba(0,0,0,0.25);
-            border: 2px solid #90a4ae;
+            background: conic-gradient(#cfd8dc, #90a4ae, #ffffff, #90a4ae, #cfd8dc);
+            border: 2px solid #90a4ae; color: #37474f;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 5px 15px rgba(0,0,0,0.1);
         }
-        .medal.plata span {
-            color: #37474f;
-            text-shadow: -1px -1px 1px rgba(0,0,0,0.5), 1px 1px 1px rgba(255,255,255,0.9);
-        }
-
-        /* 4. TEXTURA BRONCE REALISTA */
+        /* Bronce */
         .medal.bronce {
-            background: conic-gradient(#cd7f32 0deg, #8b4513 60deg, #e8a365 120deg, #8b4513 180deg, #cd7f32 240deg, #5c2e0b 300deg, #cd7f32 360deg);
-            box-shadow: 
-                inset 0 0 10px rgba(62, 39, 35, 0.7), 
-                inset -2px -2px 6px rgba(0,0,0,0.4),
-                inset 2px 2px 6px rgba(255, 160, 122, 0.5),
-                0 5px 8px rgba(0,0,0,0.25);
-            border: 2px solid #8b4513;
+            background: conic-gradient(#cd7f32, #8b4513, #e8a365, #8b4513, #cd7f32);
+            border: 2px solid #8b4513; color: #3e2723;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.3), 0 5px 15px rgba(0,0,0,0.15);
         }
-        .medal.bronce span {
-            color: #3e2723;
-            text-shadow: -1px -1px 1px rgba(0,0,0,0.6), 1px 1px 1px rgba(232, 163, 101, 0.6);
-        }
-
-        /* 5. TEXTURA METAL (ACERO/HIERRO) REALISTA */
+        /* Metal */
         .medal.metal {
-            background: 
-                /* Patrón rayado sutil para acero cepillado */
-                repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0, rgba(0,0,0,0.03) 2px, transparent 2px, transparent 4px),
-                conic-gradient(#78909c 0deg, #455a64 60deg, #b0bec5 120deg, #455a64 180deg, #78909c 240deg, #263238 300deg, #78909c 360deg);
-            box-shadow: 
-                inset 0 0 8px rgba(33, 33, 33, 0.8), 
-                inset -2px -2px 6px rgba(0,0,0,0.5),
-                inset 2px 2px 5px rgba(255,255,255,0.4),
-                0 5px 8px rgba(0,0,0,0.25);
-            border: 2px solid #455a64;
-        }
-        .medal.metal span {
-            color: #1a1a1a;
-            text-shadow: -1px -1px 1px rgba(0,0,0,0.8), 1px 1px 1px rgba(176, 190, 197, 0.5);
+            background: conic-gradient(#78909c, #455a64, #b0bec5, #455a64, #78909c);
+            border: 2px solid #455a64; color: #1a1a1a;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.2), 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* Datos de los Niveles */
         .nivel-right {
             flex: 1;
             display: grid;
@@ -258,34 +189,95 @@
             padding-left: 3rem;
         }
 
-        .info-block { display: flex; flex-direction: column; gap: 0.5rem; }
-        .info-block h4 { font-size: 0.95rem; color: var(--negro); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--amarillo); display: inline-block; padding-bottom: 4px; align-self: flex-start; }
-        .info-block p { font-size: 1rem; color: var(--azul); line-height: 1.4; }
+        .info-block h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--negro);
+            border-bottom: 2px solid var(--amarillo);
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        /* --- SECCION SOFTWARE --- */
+        #software {
+            background-color: var(--azul);
+            color: var(--blanco);
+            padding: 6rem 10%;
+            text-align: center;
+        }
+        #software h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        #software .subheader { font-size: 1.2rem; opacity: 0.8; max-width: 800px; margin: 0 auto 4rem; }
+
+        .sw-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 4rem auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .sw-line-bg {
+            position: absolute;
+            top: 30px; left: 0; width: 100%; height: 4px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1;
+        }
+
+        .sw-line-active {
+            position: absolute;
+            top: 30px; left: 0; width: 0%; height: 4px;
+            background: var(--amarillo);
+            z-index: 2;
+            transition: width 2s ease-in-out;
+        }
+
+        .sw-step {
+            position: relative;
+            z-index: 3;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.6s ease;
+        }
+
+        .sw-step.active { opacity: 1; transform: translateY(0); }
+
+        .sw-dot {
+            width: 60px; height: 60px;
+            background: var(--blanco);
+            border: 4px solid var(--amarillo);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--azul); font-weight: bold;
+        }
+
+        .sw-step p { font-weight: 600; font-size: 1rem; max-width: 180px; }
+
+        .sw-footer-text { max-width: 850px; margin: 4rem auto 0; font-size: 1.1rem; opacity: 0.9; }
 
         /* --- FOOTER --- */
-        footer { background: var(--azul); padding: 2.5rem; text-align: center; color: var(--blanco); font-style: italic; font-size: 0.8rem; }
+        footer { background: #0e193f; padding: 3rem; text-align: center; color: var(--blanco); font-size: 0.8rem; }
 
-        /* --- MOBILE OPTIMIZATION --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 950px) {
-            .nivel-card { flex-direction: column; gap: 2rem; padding: 2rem; text-align: center; }
-            .nivel-right { grid-template-columns: 1fr; border-left: none; padding-left: 0; border-top: 1px solid #e0e0e0; padding-top: 2rem; gap: 1.5rem; }
-            .info-block h4 { align-self: center; }
-            .nivel-left { min-width: auto; }
+            .nivel-card { flex-direction: column; text-align: center; }
+            .nivel-right { grid-template-columns: 1fr; border-left: none; border-top: 1px solid #eee; padding: 2rem 0 0 0; }
+            .sw-timeline { flex-direction: column; align-items: center; gap: 3rem; }
+            .sw-line-bg, .sw-line-active { display: none; }
+            #hero { flex-direction: column; text-align: center; gap: 4rem; }
+            .hero-logo img { width: 220px; }
+            .grid-3x2, .grid-2x2 { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 850px) {
-            header { padding: 1rem 8%; }
             .menu-toggle { display: block; }
             nav ul { position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--blanco); flex-direction: column; justify-content: center; align-items: center; transition: 0.4s ease; z-index: 1001; }
             nav ul.active { right: 0; }
-            nav ul li { margin: 1rem 0; }
-
-            #hero { flex-direction: column; text-align: center; gap: 3rem; padding-top: 5rem; }
-            .hero-logo img { width: 180px; }
-            .hero-text h1 { font-size: 1.8rem; }
-
-            .grid-2x2, .grid-3x2 { grid-template-columns: 1fr; }
-            section.content-section { padding: 4rem 8%; }
         }
     </style>
 </head>
@@ -299,6 +291,7 @@
                 <li><a href="#propuesta">Propuesta</a></li>
                 <li><a href="#referenciales">Referenciales</a></li>
                 <li><a href="#niveles">Niveles</a></li>
+                <li><a href="#software">Software</a></li>
                 <li><a href="#principios">Principios</a></li>
             </ul>
         </nav>
@@ -349,115 +342,88 @@
 
     <section id="niveles" class="content-section">
         <h2 class="section-title">Niveles de Cumplimiento</h2>
-        
         <div class="niveles-container">
-            
-            <div class="nivel-card diamante">
+            <div class="nivel-card">
                 <div class="nivel-left">
-                    <div class="medal diamante"><span>5</span></div>
+                    <div class="medal diamante">5</div>
                     <h3>Nivel 5<br>Diamante</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block">
-                        <h4>Cumplimiento</h4>
-                        <p>Cumple de 80% a 100% del ENIA</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>A qué pueden optar</h4>
-                        <p>Muy viable a corto, medio y largo plazo</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>¿Qué tiene la empresa?</h4>
-                        <p>Tiene ENS Alto, ISO 27k1 y cumple ciertos aspectos de ISO 31k, ISO 42k, AI Act</p>
-                    </div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 80% a 100% del ENIA</p></div>
+                    <div class="info-block"><h4>A qué pueden optar</h4><p>Muy viable a corto, medio y largo plazo</p></div>
+                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>Tiene ENS Alto, ISO 27k1 y cumple ciertos aspectos de ISO 31k, ISO 42k, AI Act</p></div>
                 </div>
             </div>
-
-            <div class="nivel-card oro">
+            <div class="nivel-card">
                 <div class="nivel-left">
-                    <div class="medal oro"><span>4</span></div>
+                    <div class="medal oro">4</div>
                     <h3>Nivel 4<br>Oro</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block">
-                        <h4>Cumplimiento</h4>
-                        <p>Cumple de 60% a 80% del ENIA</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>A qué pueden optar</h4>
-                        <p>Viable a corto, medio y largo plazo</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>¿Qué tiene la empresa?</h4>
-                        <p>Tiene ambos: ENS Medio + ISO 27k1</p>
-                    </div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 60% a 80% del ENIA</p></div>
+                    <div class="info-block"><h4>A qué pueden optar</h4><p>Viable a corto, medio y largo plazo</p></div>
+                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>Tiene ambos: ENS Medio + ISO 27k1</p></div>
                 </div>
             </div>
-
-            <div class="nivel-card plata">
+            <div class="nivel-card">
                 <div class="nivel-left">
-                    <div class="medal plata"><span>3</span></div>
+                    <div class="medal plata">3</div>
                     <h3>Nivel 3<br>Plata</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block">
-                        <h4>Cumplimiento</h4>
-                        <p>Cumple de 40% a 60% del ENIA</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>A qué pueden optar</h4>
-                        <p>Viable a corto y medio</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>¿Qué tiene la empresa?</h4>
-                        <p>El que tiene ENS Medio o ISO 27k1</p>
-                    </div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 40% a 60% del ENIA</p></div>
+                    <div class="info-block"><h4>A qué pueden optar</h4><p>Viable a corto y medio</p></div>
+                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>El que tiene ENS Medio o ISO 27k1</p></div>
                 </div>
             </div>
-
-            <div class="nivel-card bronce">
+            <div class="nivel-card">
                 <div class="nivel-left">
-                    <div class="medal bronce"><span>2</span></div>
+                    <div class="medal bronce">2</div>
                     <h3>Nivel 2<br>Bronce</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block">
-                        <h4>Cumplimiento</h4>
-                        <p>Cumple de 20% a 40% del ENIA</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>A qué pueden optar</h4>
-                        <p>Solo viable a medio plazo (ni corto ni largo)<br>Viabilidad de ciclo de vida: 1 año</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>¿Qué tiene la empresa?</h4>
-                        <p>El que tiene el Lince o ENS Medio</p>
-                    </div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 20% a 40% del ENIA</p></div>
+                    <div class="info-block"><h4>A qué pueden optar</h4><p>Solo viable a medio plazo. Viabilidad de ciclo de vida: 1 año</p></div>
+                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>El que tiene el Lince o ENS Medio</p></div>
                 </div>
             </div>
-
-            <div class="nivel-card metal">
+            <div class="nivel-card">
                 <div class="nivel-left">
-                    <div class="medal metal"><span>1</span></div>
+                    <div class="medal metal">1</div>
                     <h3>Nivel 1<br>Metal</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block">
-                        <h4>Cumplimiento</h4>
-                        <p>Cumple de 0% a 20% del ENIA</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>A qué pueden optar</h4>
-                        <p>No viable a medio y largo plazo</p>
-                    </div>
-                    <div class="info-block">
-                        <h4>¿Qué tiene la empresa?</h4>
-                        <p>Únicamente tiene Lince</p>
-                    </div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 0% a 20% del ENIA</p></div>
+                    <div class="info-block"><h4>A qué pueden optar</h4><p>No viable a medio y largo plazo</p></div>
+                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>Únicamente tiene Lince</p></div>
                 </div>
             </div>
-
         </div>
+    </section>
+
+    <section id="software">
+        <h2>Desarrollo de Software & IA para ENIA:</h2>
+        <p class="subheader">Proponemos desarrollar un software para ayudar con la implementación y auditorías del ENIA, empezando con la Declaración de Aplicabilidad.</p>
+        
+        <div class="sw-timeline">
+            <div class="sw-line-bg"></div>
+            <div class="sw-line-active" id="active-line"></div>
+
+            <div class="sw-step" style="transition-delay: 0.2s;">
+                <div class="sw-dot">1</div>
+                <p>Formulario Web: Declaración de Aplicabilidad</p>
+            </div>
+            <div class="sw-step" style="transition-delay: 0.8s;">
+                <div class="sw-dot">2</div>
+                <p>Análisis IA</p>
+            </div>
+            <div class="sw-step" style="transition-delay: 1.4s;">
+                <div class="sw-dot">3</div>
+                <p>Reporte inicial IA</p>
+            </div>
+        </div>
+
+        <p class="sw-footer-text">El objetivo es hacer mas eficiente el proceso con la ayuda de software & IA. Con este sistema, el auditor ya sabe la situación de la empresa y tiene un reporte con recomendaciones y análisis de IA.</p>
     </section>
 
     <section id="principios" class="content-section">
@@ -470,29 +436,39 @@
             <div class="card"><h3>Soberanía</h3><p>Prioridad a infraestructuras nacionales para garantizar la seguridad.</p></div>
             <div class="card">
                 <h3>Visión Internacional</h3>
-                <p>Proyección nacional inicial con expansión hacia Europa y la OTAN, de la mano de <a href="https://www.sgs.com/es-es/services/auditoria-y-certificacion" target="_blank" class="link-sgs">SGS</a> como validador final.</p>
+                <p>Enfoque de proyección nacional a corto plazo e internacional a medio/largo plazo (UE/OTAN), de la mano de <a href="https://www.sgs.com/es-es/services/auditoria-y-certificacion" target="_blank" class="link-sgs">SGS</a> como validador final.</p>
             </div>
         </div>
     </section>
 
-    <footer><p>© 2026 CESN. Todos los derechos reservados.</p></footer>
+    <footer>
+        <p>© 2026 CESN. Desarrollo de Marco Regulatorio para modelos de IA en Defensa.</p>
+    </footer>
 
     <script>
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Menu movil
+        const menuBtn = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-        const navLinks = document.querySelectorAll('nav a');
-
-        mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
             navList.classList.toggle('active');
         });
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                navList.classList.remove('active');
+        // Animacion Software on Scroll
+        const softwareSection = document.getElementById('software');
+        const activeLine = document.getElementById('active-line');
+        const steps = document.querySelectorAll('.sw-step');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    activeLine.style.width = '100%';
+                    steps.forEach(step => step.classList.add('active'));
+                }
             });
-        });
+        }, { threshold: 0.5 });
+
+        observer.observe(softwareSection);
     </script>
 </body>
 </html>
