@@ -17,13 +17,6 @@
             --amarillo: #FFED00;
             --negro: #000000;
             --azul-electrico: #007bff;
-            
-            /* Colores Medallas */
-            --diamante-1: #e0f7fa; --diamante-2: #26c6da; --diamante-borde: #00838f;
-            --oro-1: #fff8e1; --oro-2: #ffc107; --oro-borde: #ff8f00;
-            --plata-1: #f5f5f5; --plata-2: #bdbdbd; --plata-borde: #757575;
-            --bronce-1: #fbe9e7; --bronce-2: #ff8a65; --bronce-borde: #d84315;
-            --metal-1: #eceff1; --metal-2: #90a4ae; --metal-borde: #455a64;
         }
 
         * {
@@ -110,7 +103,7 @@
 
         #propuesta, #niveles { background: var(--gris); }
 
-        /* --- NIVELES (NUEVA SECCIÓN) --- */
+        /* --- NIVELES (MEDALLAS REALISTAS) --- */
         .niveles-container { display: flex; flex-direction: column; gap: 2rem; max-width: 1200px; margin: 0 auto; }
 
         .nivel-card {
@@ -122,21 +115,16 @@
             gap: 3rem;
             align-items: center;
             border-left: 6px solid transparent;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
         }
-        .nivel-card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-        }
+        .nivel-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
 
-        /* Border highlights per level */
-        .nivel-card.diamante:hover { border-left-color: var(--diamante-2); }
-        .nivel-card.oro:hover { border-left-color: var(--oro-2); }
-        .nivel-card.plata:hover { border-left-color: var(--plata-2); }
-        .nivel-card.bronce:hover { border-left-color: var(--bronce-2); }
-        .nivel-card.metal:hover { border-left-color: var(--metal-2); }
+        .nivel-card.diamante:hover { border-left-color: #80deea; }
+        .nivel-card.oro:hover { border-left-color: #f3c623; }
+        .nivel-card.plata:hover { border-left-color: #cfd8dc; }
+        .nivel-card.bronce:hover { border-left-color: #cd7f32; }
+        .nivel-card.metal:hover { border-left-color: #78909c; }
 
-        /* Left Side: Medal & Title */
         .nivel-left {
             display: flex;
             flex-direction: column;
@@ -147,43 +135,120 @@
             gap: 1rem;
         }
 
-        .nivel-left h3 {
-            font-size: 1.2rem;
-            color: var(--azul);
-            line-height: 1.2;
-        }
+        .nivel-left h3 { font-size: 1.2rem; color: var(--azul); line-height: 1.2; }
 
+        /* Estructura Base de la Medalla */
         .medal {
-            width: 70px;
-            height: 70px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             position: relative;
-            box-shadow: inset 0 -4px 10px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 1.5rem;
-            color: var(--blanco);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.8rem;
+            font-weight: 700;
         }
-        .medal::after {
+        
+        /* Borde interior brillante de la moneda */
+        .medal::before {
             content: '';
             position: absolute;
-            top: 5px; left: 10px; width: 20px; height: 10px;
-            background: rgba(255,255,255,0.6);
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
             border-radius: 50%;
-            transform: rotate(-45deg);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+            pointer-events: none;
+            z-index: 1;
         }
 
-        /* Medal Colors */
-        .medal.diamante { background: linear-gradient(135deg, var(--diamante-1), var(--diamante-2)); border: 3px solid var(--diamante-borde); color: var(--diamante-borde); }
-        .medal.oro { background: linear-gradient(135deg, var(--oro-1), var(--oro-2)); border: 3px solid var(--oro-borde); }
-        .medal.plata { background: linear-gradient(135deg, var(--plata-1), var(--plata-2)); border: 3px solid var(--plata-borde); }
-        .medal.bronce { background: linear-gradient(135deg, var(--bronce-1), var(--bronce-2)); border: 3px solid var(--bronce-borde); }
-        .medal.metal { background: linear-gradient(135deg, var(--metal-1), var(--metal-2)); border: 3px solid var(--metal-borde); }
+        .medal span {
+            position: relative;
+            z-index: 2;
+        }
 
-        /* Right Side: Data grid */
+        /* 1. TEXTURA DIAMANTE REALISTA */
+        .medal.diamante {
+            /* Efecto cristal/faceta usando conic-gradient con cortes duros */
+            background: conic-gradient(from 15deg, #e0f7fa 0deg, #b2ebf2 45deg, #ffffff 90deg, #80deea 135deg, #e0f7fa 180deg, #4dd0e1 225deg, #ffffff 270deg, #b2ebf2 315deg, #e0f7fa 360deg);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 131, 143, 0.5), 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.9), 
+                0 6px 10px rgba(0,0,0,0.2), 
+                0 0 15px rgba(128, 222, 234, 0.4); /* Resplandor */
+            border: 2px solid #b2ebf2;
+        }
+        .medal.diamante span {
+            color: #006064;
+            /* Efecto grabado en cristal */
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8), -1px -1px 1px rgba(0, 96, 100, 0.5);
+        }
+
+        /* 2. TEXTURA ORO REALISTA */
+        .medal.oro {
+            background: conic-gradient(#f3c623 0deg, #d39818 60deg, #fdf0a6 120deg, #d39818 180deg, #f3c623 240deg, #a67b1e 300deg, #f3c623 360deg);
+            box-shadow: 
+                inset 0 0 8px rgba(139, 69, 19, 0.6), 
+                inset -2px -2px 6px rgba(0,0,0,0.3),
+                inset 2px 2px 6px rgba(255,255,255,0.7),
+                0 5px 8px rgba(0,0,0,0.25);
+            border: 2px solid #d39818;
+        }
+        .medal.oro span {
+            color: #5c3a21;
+            /* Efecto troquelado hundido (grabado) */
+            text-shadow: -1px -1px 1px rgba(0,0,0,0.4), 1px 1px 1px rgba(253, 240, 166, 0.8);
+        }
+
+        /* 3. TEXTURA PLATA REALISTA */
+        .medal.plata {
+            background: conic-gradient(#cfd8dc 0deg, #90a4ae 60deg, #ffffff 120deg, #90a4ae 180deg, #cfd8dc 240deg, #607d8b 300deg, #cfd8dc 360deg);
+            box-shadow: 
+                inset 0 0 8px rgba(55, 71, 79, 0.5), 
+                inset -2px -2px 6px rgba(0,0,0,0.2),
+                inset 2px 2px 6px rgba(255,255,255,0.8),
+                0 5px 8px rgba(0,0,0,0.25);
+            border: 2px solid #90a4ae;
+        }
+        .medal.plata span {
+            color: #37474f;
+            text-shadow: -1px -1px 1px rgba(0,0,0,0.5), 1px 1px 1px rgba(255,255,255,0.9);
+        }
+
+        /* 4. TEXTURA BRONCE REALISTA */
+        .medal.bronce {
+            background: conic-gradient(#cd7f32 0deg, #8b4513 60deg, #e8a365 120deg, #8b4513 180deg, #cd7f32 240deg, #5c2e0b 300deg, #cd7f32 360deg);
+            box-shadow: 
+                inset 0 0 10px rgba(62, 39, 35, 0.7), 
+                inset -2px -2px 6px rgba(0,0,0,0.4),
+                inset 2px 2px 6px rgba(255, 160, 122, 0.5),
+                0 5px 8px rgba(0,0,0,0.25);
+            border: 2px solid #8b4513;
+        }
+        .medal.bronce span {
+            color: #3e2723;
+            text-shadow: -1px -1px 1px rgba(0,0,0,0.6), 1px 1px 1px rgba(232, 163, 101, 0.6);
+        }
+
+        /* 5. TEXTURA METAL (ACERO/HIERRO) REALISTA */
+        .medal.metal {
+            background: 
+                /* Patrón rayado sutil para acero cepillado */
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0, rgba(0,0,0,0.03) 2px, transparent 2px, transparent 4px),
+                conic-gradient(#78909c 0deg, #455a64 60deg, #b0bec5 120deg, #455a64 180deg, #78909c 240deg, #263238 300deg, #78909c 360deg);
+            box-shadow: 
+                inset 0 0 8px rgba(33, 33, 33, 0.8), 
+                inset -2px -2px 6px rgba(0,0,0,0.5),
+                inset 2px 2px 5px rgba(255,255,255,0.4),
+                0 5px 8px rgba(0,0,0,0.25);
+            border: 2px solid #455a64;
+        }
+        .medal.metal span {
+            color: #1a1a1a;
+            text-shadow: -1px -1px 1px rgba(0,0,0,0.8), 1px 1px 1px rgba(176, 190, 197, 0.5);
+        }
+
+        /* Datos de los Niveles */
         .nivel-right {
             flex: 1;
             display: grid;
@@ -204,7 +269,7 @@
         @media (max-width: 950px) {
             .nivel-card { flex-direction: column; gap: 2rem; padding: 2rem; text-align: center; }
             .nivel-right { grid-template-columns: 1fr; border-left: none; padding-left: 0; border-top: 1px solid #e0e0e0; padding-top: 2rem; gap: 1.5rem; }
-            .info-block h4 { align-self: center; } /* Centra los títulos en móvil */
+            .info-block h4 { align-self: center; }
             .nivel-left { min-width: auto; }
         }
 
@@ -289,7 +354,7 @@
             
             <div class="nivel-card diamante">
                 <div class="nivel-left">
-                    <div class="medal diamante">5</div>
+                    <div class="medal diamante"><span>5</span></div>
                     <h3>Nivel 5<br>Diamante</h3>
                 </div>
                 <div class="nivel-right">
@@ -310,7 +375,7 @@
 
             <div class="nivel-card oro">
                 <div class="nivel-left">
-                    <div class="medal oro">4</div>
+                    <div class="medal oro"><span>4</span></div>
                     <h3>Nivel 4<br>Oro</h3>
                 </div>
                 <div class="nivel-right">
@@ -331,7 +396,7 @@
 
             <div class="nivel-card plata">
                 <div class="nivel-left">
-                    <div class="medal plata">3</div>
+                    <div class="medal plata"><span>3</span></div>
                     <h3>Nivel 3<br>Plata</h3>
                 </div>
                 <div class="nivel-right">
@@ -352,7 +417,7 @@
 
             <div class="nivel-card bronce">
                 <div class="nivel-left">
-                    <div class="medal bronce">2</div>
+                    <div class="medal bronce"><span>2</span></div>
                     <h3>Nivel 2<br>Bronce</h3>
                 </div>
                 <div class="nivel-right">
@@ -373,7 +438,7 @@
 
             <div class="nivel-card metal">
                 <div class="nivel-left">
-                    <div class="medal metal">1</div>
+                    <div class="medal metal"><span>1</span></div>
                     <h3>Nivel 1<br>Metal</h3>
                 </div>
                 <div class="nivel-right">
@@ -413,7 +478,6 @@
     <footer><p>© 2026 CESN. Todos los derechos reservados.</p></footer>
 
     <script>
-        // Funcionalidad Menú Hamburguesa Móvil
         const mobileMenu = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
         const navLinks = document.querySelectorAll('nav a');
