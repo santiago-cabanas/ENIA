@@ -142,8 +142,8 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        .grid-2x2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-        .grid-3x2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-2x2 { grid-template-columns: repeat(2, 1fr); max-width: 900px; }
+        .grid-3x2 { grid-template-columns: repeat(3, 1fr); }
 
         .card {
             background: var(--blanco);
@@ -272,6 +272,7 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
+            .grid-2x2, .grid-3x2 { grid-template-columns: 1fr; }
             .nivel-card { flex-direction: column; text-align: center; padding: 1.5rem; }
             .nivel-right { grid-template-columns: 1fr; border-left: none; border-top: 1px solid var(--gris-medio); padding: 1.5rem 0 0 0; width: 100%; }
             .sw-timeline { flex-direction: column; gap: 2.5rem; align-items: center; }
