@@ -7,12 +7,14 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --blanco: #ffffff;
-            --gris: #f9f9f9;
+            --gris-claro: #f9f9f9;
+            --gris-medio: #e0e0e0;
+            --gris-oscuro: #444444;
             --azul: #172967;
             --amarillo: #FFED00;
             --negro: #000000;
@@ -30,254 +32,262 @@
         body {
             background-color: var(--blanco);
             color: var(--negro);
-            line-height: 1.5;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER & NAV --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: var(--blanco);
+            background-color: rgba(255, 255, 255, 0.98);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
+            padding: 0.8rem 5%;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .logo-header { height: 35px; width: auto; }
 
-        nav ul { display: flex; list-style: none; gap: 2.5rem; }
-        nav a { text-decoration: none; color: var(--negro); font-weight: 400; transition: color 0.3s; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { 
+            text-decoration: none; 
+            color: var(--negro); 
+            font-weight: 400; 
+            font-size: 0.95rem;
+            transition: color 0.3s; 
+        }
         nav a:hover { color: var(--azul); }
 
-        .menu-toggle { display: none; width: 30px; height: 22px; position: relative; cursor: pointer; z-index: 1002; margin-left: auto; }
-        .menu-toggle span { display: block; position: absolute; height: 2px; width: 100%; background: var(--negro); border-radius: 2px; transition: .25s ease; }
-        .menu-toggle span:nth-child(1) { top: 0; }
-        .menu-toggle span:nth-child(2) { top: 10px; width: 70%; right: 0; }
-        .menu-toggle span:nth-child(3) { top: 20px; }
-        .menu-toggle.open span:nth-child(1) { top: 10px; transform: rotate(135deg); }
-        .menu-toggle.open span:nth-child(2) { opacity: 0; }
-        .menu-toggle.open span:nth-child(3) { top: 10px; transform: rotate(-135deg); }
+        .menu-toggle { 
+            display: none; 
+            flex-direction: column; 
+            gap: 5px; 
+            cursor: pointer; 
+        }
+        .menu-toggle span { 
+            width: 25px; 
+            height: 2px; 
+            background: var(--negro); 
+            transition: 0.3s; 
+        }
 
         /* --- HERO --- */
         #hero {
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0 10%;
-            gap: 8rem;
-            margin-top: 60px;
+            text-align: center;
+            padding: 100px 5% 60px;
+            background: radial-gradient(circle at center, #ffffff 0%, #fcfcfc 100%);
         }
 
-        .hero-logo img {
-            width: 320px; /* Logo grande */
-            height: auto;
-        }
-
-        .hero-text {
-            max-width: 550px; /* Textbox estrecho para que respire */
-        }
-
-        .hero-text h1 {
-            font-size: 2.8rem;
+        .hero-title {
             color: var(--azul);
-            line-height: 1.2;
-            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
-        /* --- SECCIONES GENERICAS --- */
-        section.content-section { padding: 6rem 10%; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: var(--azul); }
+        .hero-title .enia-main {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
 
-        .cards-grid { display: grid; gap: 2rem; }
-        .grid-2x2 { grid-template-columns: repeat(2, 1fr); max-width: 1000px; margin: 0 auto; }
-        .grid-3x2 { grid-template-columns: repeat(3, 1fr); }
+        .hero-title .enia-sub {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 600;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--gris-oscuro);
+            font-style: italic;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        /* --- SECCIONES --- */
+        section.content-section { padding: 5rem 8%; }
+        .section-title { 
+            text-align: center; 
+            font-size: 2.2rem; 
+            margin-bottom: 3.5rem; 
+            color: var(--azul); 
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: var(--amarillo);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* GRID CARDS */
+        .cards-grid { 
+            display: grid; 
+            gap: 1.5rem; 
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .grid-2x2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3x2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
         .card {
             background: var(--blanco);
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid transparent;
-            transition: 0.3s;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.8rem;
         }
-        .card:hover { transform: translateY(-8px); border-color: var(--negro); }
-        .card h3 { font-size: 1.3rem; color: var(--negro); }
-        .card p { color: var(--azul); font-size: 1rem; }
-        .link-sgs { color: var(--azul-electrico); text-decoration: underline; font-weight: 600; }
+        .card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--azul);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .card h3 { font-size: 1.2rem; color: var(--negro); }
+        .card p { color: var(--azul); font-size: 0.95rem; }
 
-        #propuesta, #niveles { background: var(--gris); }
+        /* WIDE CARD REFERENTES */
+        .card-wide {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 1rem;
+            background-color: #fbfbfb;
+        }
+        .card-wide h3 {
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .list-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .list-container ul {
+            list-style: none;
+        }
+        .list-container ul li {
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: var(--azul);
+        }
 
-        /* --- SECCION NIVELES (MEDALLAS REALISTAS) --- */
-        .niveles-container { display: flex; flex-direction: column; gap: 2rem; max-width: 1200px; margin: 0 auto; }
-
+        /* --- NIVELES --- */
+        #niveles { background: var(--gris-claro); }
+        .niveles-container { display: flex; flex-direction: column; gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+        
         .nivel-card {
             background: var(--blanco);
             border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 2rem;
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
             align-items: center;
-            border-left: 6px solid transparent;
-            transition: 0.3s ease;
-        }
-        .nivel-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
-
-        .nivel-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-width: 150px;
-            text-align: center;
-            gap: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
+        .nivel-left { min-width: 140px; text-align: center; }
         .medal {
-            width: 75px; height: 75px;
+            width: 70px; height: 70px;
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem; font-weight: 700;
-            position: relative;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        /* Diamante */
-        .medal.diamante {
-            background: conic-gradient(from 15deg, #e0f7fa, #b2ebf2, #ffffff, #80deea, #e0f7fa);
-            border: 2px solid #b2ebf2; color: #006064;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.8), 0 5px 15px rgba(0,0,0,0.1);
-        }
-        /* Oro */
-        .medal.oro {
-            background: conic-gradient(#f3c623, #d39818, #fdf0a6, #d39818, #f3c623);
-            border: 2px solid #d39818; color: #5c3a21;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 5px 15px rgba(0,0,0,0.15);
-        }
-        /* Plata */
-        .medal.plata {
-            background: conic-gradient(#cfd8dc, #90a4ae, #ffffff, #90a4ae, #cfd8dc);
-            border: 2px solid #90a4ae; color: #37474f;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 5px 15px rgba(0,0,0,0.1);
-        }
-        /* Bronce */
-        .medal.bronce {
-            background: conic-gradient(#cd7f32, #8b4513, #e8a365, #8b4513, #cd7f32);
-            border: 2px solid #8b4513; color: #3e2723;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.3), 0 5px 15px rgba(0,0,0,0.15);
-        }
-        /* Metal */
-        .medal.metal {
-            background: conic-gradient(#78909c, #455a64, #b0bec5, #455a64, #78909c);
-            border: 2px solid #455a64; color: #1a1a1a;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.2), 0 5px 15px rgba(0,0,0,0.1);
-        }
+        /* Estilos Medallas */
+        .medal.diamante { background: conic-gradient(#e0f7fa, #b2ebf2, #ffffff, #80deea, #e0f7fa); color: #006064; border: 2px solid #b2ebf2; }
+        .medal.oro { background: conic-gradient(#f3c623, #d39818, #fdf0a6, #d39818, #f3c623); color: #5c3a21; border: 2px solid #d39818; }
+        .medal.plata { background: conic-gradient(#cfd8dc, #90a4ae, #ffffff, #90a4ae, #cfd8dc); color: #37474f; border: 2px solid #90a4ae; }
+        .medal.bronce { background: conic-gradient(#cd7f32, #8b4513, #e8a365, #8b4513, #cd7f32); color: #3e2723; border: 2px solid #8b4513; }
+        .medal.metal { background: conic-gradient(#78909c, #455a64, #b0bec5, #455a64, #78909c); color: #1a1a1a; border: 2px solid #455a64; }
 
         .nivel-right {
             flex: 1;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            border-left: 1px solid #e0e0e0;
-            padding-left: 3rem;
+            gap: 1.5rem;
+            border-left: 1px solid var(--gris-medio);
+            padding-left: 2rem;
         }
-
         .info-block h4 {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            color: var(--negro);
+            color: var(--gris-oscuro);
             border-bottom: 2px solid var(--amarillo);
             display: inline-block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
+        .info-block p { font-size: 0.9rem; }
 
-        /* --- SECCION SOFTWARE --- */
+        /* --- SOFTWARE --- */
         #software {
             background-color: var(--azul);
             color: var(--blanco);
-            padding: 6rem 10%;
+            padding: 5rem 10%;
             text-align: center;
         }
-        #software h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-        #software .subheader { font-size: 1.2rem; opacity: 0.8; max-width: 800px; margin: 0 auto 4rem; }
-
+        #software .subheader { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto 3rem; }
+        
         .sw-timeline {
             position: relative;
-            max-width: 900px;
-            margin: 4rem auto;
+            max-width: 800px;
+            margin: 3rem auto;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
         }
-
-        .sw-line-bg {
-            position: absolute;
-            top: 30px; left: 0; width: 100%; height: 4px;
-            background: rgba(255,255,255,0.1);
-            z-index: 1;
-        }
-
-        .sw-line-active {
-            position: absolute;
-            top: 30px; left: 0; width: 0%; height: 4px;
-            background: var(--amarillo);
-            z-index: 2;
-            transition: width 2s ease-in-out;
-        }
-
-        .sw-step {
-            position: relative;
-            z-index: 3;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: 0.6s ease;
-        }
-
+        .sw-line-bg { position: absolute; top: 25px; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,0.15); z-index: 1; }
+        .sw-line-active { position: absolute; top: 25px; left: 0; width: 0%; height: 3px; background: var(--amarillo); z-index: 2; transition: width 1.5s ease-in-out; }
+        
+        .sw-step { flex: 1; position: relative; z-index: 3; opacity: 0; transform: translateY(10px); transition: 0.5s ease; }
         .sw-step.active { opacity: 1; transform: translateY(0); }
+        .sw-dot { width: 50px; height: 50px; background: var(--blanco); border: 4px solid var(--amarillo); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; color: var(--azul); font-weight: bold; }
+        .sw-step p { font-size: 0.9rem; font-weight: 600; padding: 0 10px; }
 
-        .sw-dot {
-            width: 60px; height: 60px;
-            background: var(--blanco);
-            border: 4px solid var(--amarillo);
-            border-radius: 50%;
-            margin-bottom: 1.5rem;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--azul); font-weight: bold;
-        }
-
-        .sw-step p { font-weight: 600; font-size: 1rem; max-width: 180px; }
-
-        .sw-footer-text { max-width: 850px; margin: 4rem auto 0; font-size: 1.1rem; opacity: 0.9; }
+        .sw-footer-text { margin-top: 3rem; font-size: 1rem; opacity: 0.8; max-width: 700px; margin-inline: auto; }
 
         /* --- FOOTER --- */
-        footer { background: #0e193f; padding: 3rem; text-align: center; color: var(--blanco); font-size: 0.8rem; }
+        footer { background: #0b1430; padding: 2.5rem; text-align: center; color: rgba(255,255,255,0.6); font-size: 0.8rem; }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 950px) {
-            .nivel-card { flex-direction: column; text-align: center; }
-            .nivel-right { grid-template-columns: 1fr; border-left: none; border-top: 1px solid #eee; padding: 2rem 0 0 0; }
-            .sw-timeline { flex-direction: column; align-items: center; gap: 3rem; }
+        @media (max-width: 900px) {
+            .nivel-card { flex-direction: column; text-align: center; padding: 1.5rem; }
+            .nivel-right { grid-template-columns: 1fr; border-left: none; border-top: 1px solid var(--gris-medio); padding: 1.5rem 0 0 0; width: 100%; }
+            .sw-timeline { flex-direction: column; gap: 2.5rem; align-items: center; }
             .sw-line-bg, .sw-line-active { display: none; }
-            #hero { flex-direction: column; text-align: center; gap: 4rem; }
-            .hero-logo img { width: 220px; }
-            .grid-3x2, .grid-2x2 { grid-template-columns: 1fr; }
+            .list-container { gap: 1.5rem; flex-direction: column; align-items: center; text-align: center; }
         }
 
-        @media (max-width: 850px) {
-            .menu-toggle { display: block; }
-            nav ul { position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--blanco); flex-direction: column; justify-content: center; align-items: center; transition: 0.4s ease; z-index: 1001; }
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            nav ul { 
+                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; 
+                background: var(--blanco); flex-direction: column; padding-top: 80px; 
+                align-items: center; transition: 0.4s; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
             nav ul.active { right: 0; }
+            section.content-section { padding: 4rem 6%; }
         }
     </style>
 </head>
@@ -285,11 +295,13 @@
 
     <header>
         <a href="#hero"><img src="CESN.svg" alt="CESN Logo" class="logo-header"></a>
-        <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span><span></span><span></span>
+        </div>
         <nav>
             <ul id="nav-list">
                 <li><a href="#propuesta">Propuesta</a></li>
-                <li><a href="#referenciales">Referenciales</a></li>
+                <li><a href="#referentes">Referentes</a></li>
                 <li><a href="#niveles">Niveles</a></li>
                 <li><a href="#software">Software</a></li>
                 <li><a href="#principios">Principios</a></li>
@@ -298,12 +310,13 @@
     </header>
 
     <section id="hero">
-        <div class="hero-logo">
-            <img src="CESN.svg" alt="CESN Logo">
-        </div>
-        <div class="hero-text">
-            <h1>Desarrollo de Marco Regulatorio para modelos de IA en el sector de Defensa y Seguridad Nacional</h1>
-        </div>
+        <h1 class="hero-title">
+            <span class="enia-main">ENIA:</span>
+            <span class="enia-sub">Esquema Nacional de Inteligencia Artificial</span>
+        </h1>
+        <p class="hero-description">
+            Desarrollo de Marco Regulatorio para modelos de IA en el sector de Defensa y Seguridad Nacional
+        </p>
     </section>
 
     <section id="propuesta" class="content-section">
@@ -323,20 +336,37 @@
             </div>
             <div class="card">
                 <h3>Creado desde la Asociación</h3>
-                <p>Sin vinculación a terceros u otros proveedores. Garantizando una evolución del marco alineado con la evolución de los estándares europeos.</p>
+                <p>Sin vinculación a terceros, garantizando una evolución alineada con los estándares europeos.</p>
             </div>
         </div>
     </section>
 
-    <section id="referenciales" class="content-section">
-        <h2 class="section-title">Referenciales</h2>
+    <section id="referentes" class="content-section">
+        <h2 class="section-title">Referentes</h2>
         <div class="cards-grid grid-3x2">
             <div class="card"><h3>ENS Alto</h3><p>Seguridad de los sistemas de información nacional.</p></div>
-            <div class="card"><h3>AI Act</h3><p>Regulación Europea de Inteligencia Artificial.</p></div>
             <div class="card"><h3>ISO 27001</h3><p>Gestión de la seguridad de la información.</p></div>
+            <div class="card"><h3>AI Act</h3><p>Regulación Europea de Inteligencia Artificial.</p></div>
+            
             <div class="card"><h3>ISO 42001</h3><p>Estándar internacional para la gestión de IA.</p></div>
             <div class="card"><h3>ISO 31000</h3><p>Gestión de riesgos corporativos.</p></div>
-            <div class="card"><h3>Ley 2011</h3><p>Marco de contratación para el sector defensa.</p></div>
+            <div class="card"><h3>Ley 2011 (Contratación en Defensa)</h3><p>Marco de contratación para el sector defensa.</p></div>
+
+            <div class="card card-wide">
+                <h3>Referencias principales ENIA</h3>
+                <div class="list-container">
+                    <ul>
+                        <li>• <strong>ENS Alto:</strong> La base del ENIA.</li>
+                        <li>• <strong>ISO 27001:</strong> p.35.</li>
+                        <li>• <strong>ISO 31000:</strong> p.5, 7, 15, 22, 24, 29, 30, 38.</li>
+                    </ul>
+                    <ul>
+                        <li>• <strong>ISO 42001:</strong> p.2, 3, 15, 24, 25, 31, 38.</li>
+                        <li>• <strong>AI Act:</strong> p.1, 2, 20, 24, 25, 27, 38.</li>
+                        <li>• <strong>Ley de Contratación 2011:</strong> p.3.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -349,9 +379,9 @@
                     <h3>Nivel 5<br>Diamante</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 80% a 100% del ENIA</p></div>
-                    <div class="info-block"><h4>A qué pueden optar</h4><p>Muy viable a corto, medio y largo plazo</p></div>
-                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>Tiene ENS Alto, ISO 27k1 y cumple ciertos aspectos de ISO 31k, ISO 42k, AI Act</p></div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>80% a 100% del ENIA</p></div>
+                    <div class="info-block"><h4>Viabilidad</h4><p>Alta a corto, medio y largo plazo</p></div>
+                    <div class="info-block"><h4>Empresa</h4><p>ENS Alto, ISO 27k1 + aspectos ISO 31k, 42k, AI Act</p></div>
                 </div>
             </div>
             <div class="nivel-card">
@@ -360,9 +390,9 @@
                     <h3>Nivel 4<br>Oro</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 60% a 80% del ENIA</p></div>
-                    <div class="info-block"><h4>A qué pueden optar</h4><p>Viable a corto, medio y largo plazo</p></div>
-                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>Tiene ambos: ENS Medio + ISO 27k1</p></div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>60% a 80% del ENIA</p></div>
+                    <div class="info-block"><h4>Viabilidad</h4><p>Viable a corto, medio y largo plazo</p></div>
+                    <div class="info-block"><h4>Empresa</h4><p>Tiene ambos: ENS Medio + ISO 27k1</p></div>
                 </div>
             </div>
             <div class="nivel-card">
@@ -371,9 +401,9 @@
                     <h3>Nivel 3<br>Plata</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 40% a 60% del ENIA</p></div>
-                    <div class="info-block"><h4>A qué pueden optar</h4><p>Viable a corto y medio</p></div>
-                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>El que tiene ENS Medio o ISO 27k1</p></div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>40% a 60% del ENIA</p></div>
+                    <div class="info-block"><h4>Viabilidad</h4><p>Viable a corto y medio plazo</p></div>
+                    <div class="info-block"><h4>Empresa</h4><p>Posee ENS Medio o ISO 27k1</p></div>
                 </div>
             </div>
             <div class="nivel-card">
@@ -382,9 +412,9 @@
                     <h3>Nivel 2<br>Bronce</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 20% a 40% del ENIA</p></div>
-                    <div class="info-block"><h4>A qué pueden optar</h4><p>Solo viable a medio plazo. Viabilidad de ciclo de vida: 1 año</p></div>
-                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>El que tiene el Lince o ENS Medio</p></div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>20% a 40% del ENIA</p></div>
+                    <div class="info-block"><h4>Viabilidad</h4><p>Solo medio plazo (1 año)</p></div>
+                    <div class="info-block"><h4>Empresa</h4><p>Posee Lince o ENS Medio</p></div>
                 </div>
             </div>
             <div class="nivel-card">
@@ -393,31 +423,30 @@
                     <h3>Nivel 1<br>Metal</h3>
                 </div>
                 <div class="nivel-right">
-                    <div class="info-block"><h4>Cumplimiento</h4><p>Cumple de 0% a 20% del ENIA</p></div>
-                    <div class="info-block"><h4>A qué pueden optar</h4><p>No viable a medio y largo plazo</p></div>
-                    <div class="info-block"><h4>¿Qué tiene la empresa?</h4><p>Únicamente tiene Lince</p></div>
+                    <div class="info-block"><h4>Cumplimiento</h4><p>0% a 20% del ENIA</p></div>
+                    <div class="info-block"><h4>Viabilidad</h4><p>No viable a medio/largo plazo</p></div>
+                    <div class="info-block"><h4>Empresa</h4><p>Únicamente posee Lince</p></div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="software">
-        <h2>Desarrollo de Software & IA para ENIA:</h2>
+        <h2>Desarrollo de Software & IA para ENIA</h2>
         <p class="subheader">Proponemos desarrollar un software para ayudar con la implementación y auditorías del ENIA, empezando con la Declaración de Aplicabilidad.</p>
         
         <div class="sw-timeline">
             <div class="sw-line-bg"></div>
             <div class="sw-line-active" id="active-line"></div>
-
-            <div class="sw-step" style="transition-delay: 0.2s;">
+            <div class="sw-step">
                 <div class="sw-dot">1</div>
                 <p>Formulario Web: Declaración de Aplicabilidad</p>
             </div>
-            <div class="sw-step" style="transition-delay: 0.8s;">
+            <div class="sw-step">
                 <div class="sw-dot">2</div>
                 <p>Análisis IA</p>
             </div>
-            <div class="sw-step" style="transition-delay: 1.4s;">
+            <div class="sw-step">
                 <div class="sw-dot">3</div>
                 <p>Reporte inicial IA</p>
             </div>
@@ -436,7 +465,7 @@
             <div class="card"><h3>Soberanía</h3><p>Prioridad a infraestructuras nacionales para garantizar la seguridad.</p></div>
             <div class="card">
                 <h3>Visión Internacional</h3>
-                <p>Enfoque de proyección nacional a corto plazo e internacional a medio/largo plazo (UE/OTAN), de la mano de <a href="https://www.sgs.com/es-es/services/auditoria-y-certificacion" target="_blank" class="link-sgs">SGS</a> como validador final.</p>
+                <p>Proyección UE/OTAN, de la mano de <a href="https://www.sgs.com/es-es/services/auditoria-y-certificacion" target="_blank" style="color:var(--azul-electrico);font-weight:600;">SGS</a> como validador final.</p>
             </div>
         </div>
     </section>
@@ -446,15 +475,22 @@
     </footer>
 
     <script>
-        // Menu movil
+        // Menu Móvil con cierre automático al clickar un enlace
         const menuBtn = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
+        const navLinks = document.querySelectorAll('#nav-list a');
+
         menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('open');
             navList.classList.toggle('active');
         });
 
-        // Animacion Software on Scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+            });
+        });
+
+        // Animación Software on Scroll
         const softwareSection = document.getElementById('software');
         const activeLine = document.getElementById('active-line');
         const steps = document.querySelectorAll('.sw-step');
@@ -463,10 +499,14 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     activeLine.style.width = '100%';
-                    steps.forEach(step => step.classList.add('active'));
+                    steps.forEach((step, index) => {
+                        setTimeout(() => {
+                            step.classList.add('active');
+                        }, index * 400);
+                    });
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         observer.observe(softwareSection);
     </script>
